@@ -262,8 +262,9 @@
 
       to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
       }
+
+      /* Тепер JS вільно керує трансформацією */
     }
 
     @keyframes fadeLeft {
@@ -292,31 +293,16 @@
 
     /* Mobile */
     @media (max-width: 700px) {
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        padding: 1rem;
-        height: auto;
-      }
-
-      :root {
-        --nav-h: 80px;
-      }
-
       .hero-subtitle {
         display: none;
       }
 
       .hero-cta {
-        bottom: 2rem;
-        right: 50%;
-        transform: translateX(50%);
-      }
-
-      .hero-avatar {
-        width: 82vw;
-        bottom: 0;
+        left: 50%;
+        right: auto;
+        bottom: 2.5rem;
+        top: auto;
+        transform: translateX(-50%);
       }
     }
   </style>
@@ -400,33 +386,23 @@
       })
     })
 
-    // ── Avatar parallax — легкий рух за мишкою ───────
-    const avatar = document.getElementById('avatar');
-    let ax = 0, ay = 0, tx = 0, ty = 0;
+    // ── Avatar parallax ──────────────────────────────
+    const avatar = document.getElementById('avatar')
+    let ax = 0, ay = 0, tx = 0, ty = 0
 
-    // Функція працюватиме завжди, але на мобілках ми її просто не помітимо (бо немає миші)
     document.addEventListener('mousemove', e => {
-      // nx і ny — це позиція курсора від -1 до 1
-      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-
-      // Збільшив амплітуду до 50px і 30px, щоб рух був помітним
-      tx = nx * 50;
-      ty = ny * 30;
-    });
-
-    (function loopAvatar() {
-      // Коефіцієнт 0.055 відповідає за плавність (інерцію)
-      ax += (tx - ax) * 0.055;
-      ay += (ty - ay) * 0.055;
-
-      // Додаємо rotate, щоб голова не просто совалася, а трохи "дивилася"
-      const rotateY = ax * 0.2;
-
-      avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${rotateY}deg)`;
-
-      requestAnimationFrame(loopAvatar);
-    })();
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2
+      tx = nx * 22
+      ty = ny * 12
+    })
+      ; (function loopAvatar() {
+        ax += (tx - ax) * 0.055
+        ay += (ty - ay) * 0.055
+        // base: translateX(-50%), додаємо offset зверху
+        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px)`
+        requestAnimationFrame(loopAvatar)
+      })()
   </script>
 
 </body>
