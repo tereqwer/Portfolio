@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HI, I'M PAVLO</title>
+  <title>Pavlo Tereshchuk — Motion Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap"
     rel="stylesheet">
@@ -20,9 +20,9 @@
     :root {
       --bg: #080808;
       --text: #edeae0;
-      --text-muted: rgba(237, 234, 224, 0.38);
       --accent-grad: linear-gradient(135deg, #a259ff 0%, #ff6b6b 50%, #ffa500 100%);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --nav-h: 64px;
     }
 
     html,
@@ -79,21 +79,21 @@
       left: 0;
       right: 0;
       z-index: 200;
+      height: var(--nav-h);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 1.6rem clamp(2rem, 4vw, 4rem);
+      padding: 0 clamp(2rem, 4vw, 4rem);
       opacity: 0;
       animation: fadeDown 0.7s 0.1s var(--ease-out) forwards;
     }
 
     nav a {
-      /* 1. БІЛЬШИЙ і БІЛИЙ */
       font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text);
-      /* білий завжди */
       text-decoration: none;
       display: flex;
       flex-direction: column;
@@ -114,7 +114,7 @@
     }
 
     nav a:hover {
-      opacity: 0.7;
+      opacity: 0.65;
     }
 
     nav a:hover::after {
@@ -130,23 +130,23 @@
       overflow: hidden;
     }
 
-    /* ── Title — вище (30% замість 50%) ── */
+    /* Title — прямо під nav */
     .hero-title {
       position: absolute;
-      top: 28%;
+      top: var(--nav-h);
       left: 0;
       width: 100%;
-      transform: translateY(-50%);
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0.2rem clamp(0.5rem, 1vw, 1rem);
       font-family: 'Bebas Neue', sans-serif;
+      font-size: 100px;
+      /* JS override */
+      line-height: 0.88;
       color: var(--text);
+      z-index: 1;
       user-select: none;
       white-space: nowrap;
       opacity: 0;
-      animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
+      animation: fadeIn 0.9s 0.35s var(--ease-out) forwards;
     }
 
     .hero-title span {
@@ -155,13 +155,13 @@
       width: 100%;
     }
 
-    /* ── Avatar ── */
+    /* Avatar — нижня половина екрану */
     .hero-avatar {
       position: absolute;
-      top: 50%;
+      bottom: -5%;
       left: 50%;
-      transform: translate(-50%, -42%);
-      width: clamp(380px, 50vw, 800px);
+      transform: translateX(-50%);
+      width: clamp(360px, 48vw, 760px);
       z-index: 10;
       pointer-events: none;
       will-change: transform;
@@ -173,35 +173,31 @@
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 50px 100px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.8));
     }
 
-    /* ── Subtitle — більший і білий ── */
+    /* Subtitle */
     .hero-subtitle {
       position: absolute;
       left: clamp(2rem, 4vw, 4rem);
-      top: 50%;
-      transform: translateY(5%);
+      bottom: clamp(3rem, 8vh, 6rem);
       z-index: 20;
       max-width: 260px;
-      /* 2. БІЛЬШИЙ */
-      font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
       font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1.8;
-      /* 2. БІЛИЙ */
       color: var(--text);
       opacity: 0;
       animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
     }
 
-    /* ── CTA ── */
+    /* CTA */
     .hero-cta {
       position: absolute;
       right: clamp(2rem, 4vw, 4rem);
-      top: 50%;
-      transform: translateY(5%);
+      bottom: clamp(3rem, 8vh, 6rem);
       z-index: 20;
       opacity: 0;
       animation: fadeRight 0.8s 1s var(--ease-out) forwards;
@@ -231,10 +227,11 @@
       transform: scale(1.04);
     }
 
+    /* ── Keyframes ── */
     @keyframes fadeDown {
       from {
         opacity: 0;
-        transform: translateY(-18px);
+        transform: translateY(-16px);
       }
 
       to {
@@ -243,48 +240,64 @@
       }
     }
 
-    @keyframes fadeInAvatar {
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translate(-50%, -35%);
       }
 
       to {
         opacity: 1;
-        transform: translate(-50%, -42%);
+      }
+    }
+
+    @keyframes fadeInAvatar {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
     }
 
     @keyframes fadeLeft {
       from {
         opacity: 0;
-        transform: translate(-14px, 5%);
+        transform: translateX(-14px);
       }
 
       to {
         opacity: 1;
-        transform: translate(0, 5%);
+        transform: translateX(0);
       }
     }
 
     @keyframes fadeRight {
       from {
         opacity: 0;
-        transform: translate(14px, 5%);
+        transform: translateX(14px);
       }
 
       to {
         opacity: 1;
-        transform: translate(0, 5%);
+        transform: translateX(0);
       }
     }
 
+    /* Mobile */
     @media (max-width: 700px) {
       nav {
         flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
         padding: 1rem;
+        height: auto;
+      }
+
+      :root {
+        --nav-h: 80px;
       }
 
       .hero-subtitle {
@@ -292,7 +305,6 @@
       }
 
       .hero-cta {
-        top: auto;
         bottom: 2rem;
         right: 50%;
         transform: translateX(50%);
@@ -300,6 +312,7 @@
 
       .hero-avatar {
         width: 82vw;
+        bottom: 0;
       }
     }
   </style>
@@ -345,7 +358,7 @@
       const title = document.getElementById('heroTitle')
       const l1 = document.getElementById('l1')
       const l2 = document.getElementById('l2')
-      const avail = window.innerWidth
+      const avail = window.innerWidth - 16
       title.style.fontSize = '100px'
       const longest = Math.max(l1.scrollWidth, l2.scrollWidth)
       title.style.fontSize = Math.floor(100 * (avail / longest) * 0.97) + 'px'
@@ -387,20 +400,20 @@
     })
 
     // ── Avatar parallax ──────────────────────────────
-    // 3. ГОЛОВА РУХАЄТЬСЯ ЗА МИШКОЮ
     const avatar = document.getElementById('avatar')
     let ax = 0, ay = 0, tx = 0, ty = 0
 
     document.addEventListener('mousemove', e => {
       const nx = (e.clientX / window.innerWidth - 0.5) * 2
       const ny = (e.clientY / window.innerHeight - 0.5) * 2
-      tx = nx * 24
-      ty = ny * 16
+      tx = nx * 22
+      ty = ny * 12
     })
       ; (function loopAvatar() {
         ax += (tx - ax) * 0.055
         ay += (ty - ay) * 0.055
-        avatar.style.transform = `translate(calc(-50% + ${ax}px), calc(-42% + ${ay}px))`
+        // base: translateX(-50%), додаємо offset зверху
+        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px)`
         requestAnimationFrame(loopAvatar)
       })()
   </script>
