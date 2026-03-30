@@ -133,22 +133,26 @@
     /* Title — прямо під nav */
     .hero-title {
       position: absolute;
-      top: var(--nav-h);
       left: 0;
       width: 100%;
-      padding: 0.2rem clamp(0.5rem, 1vw, 1rem);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 100px;
-      /* JS override */
-      line-height: 0.88;
-      color: var(--text);
+      transform: translateY(-50%);
+      /* Центруємо тільки по вертикалі */
       z-index: 1;
+
+      display: flex;
+      justify-content: center;
+      /* Текст чітко по центру горизонталі */
+      align-items: center;
+
+      font-family: 'Bebas Neue', sans-serif;
+      color: var(--text);
       user-select: none;
       white-space: nowrap;
       opacity: 0;
-      animation: fadeIn 0.9s 0.35s var(--ease-out) forwards;
+      animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
     }
 
+    /* Якщо текст розбитий на спани і ти хочеш їх один під одним */
     .hero-title span {
       display: block;
       text-align: center;
@@ -179,12 +183,12 @@
     /* Subtitle */
     .hero-subtitle {
       position: absolute;
-      left: clamp(2rem, 4vw, 4rem);
-      bottom: clamp(3rem, 8vh, 6rem);
+      left: clamp(14rem, 12vw, 12rem);
+      bottom: clamp(22rem, 12vh, 12rem);
       z-index: 20;
-      max-width: 260px;
-      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-      font-weight: 400;
+      max-width: 460px;
+      font-size: clamp(1.4rem, 1.8vw, 1.4rem);
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1.8;
@@ -332,8 +336,7 @@
 
   <section id="hero">
     <h1 class="hero-title" id="heroTitle">
-      <span id="l1">HI, I'M</span>
-      <span id="l2">PAVLO</span>
+      HI, I'M PAVLO
     </h1>
 
     <div class="hero-avatar" id="avatar">
@@ -356,12 +359,10 @@
     // ── Fit title to full width ──────────────────────
     function fitTitle() {
       const title = document.getElementById('heroTitle')
-      const l1 = document.getElementById('l1')
-      const l2 = document.getElementById('l2')
       const avail = window.innerWidth - 16
       title.style.fontSize = '100px'
-      const longest = Math.max(l1.scrollWidth, l2.scrollWidth)
-      title.style.fontSize = Math.floor(100 * (avail / longest) * 0.97) + 'px'
+      const longest = title.scrollWidth
+      title.style.fontSize = Math.floor(500 * (avail / longest) * 0.97) + 'px'
     }
     fitTitle()
     window.addEventListener('resize', fitTitle)
