@@ -181,33 +181,41 @@
     .hero-content-inner {
       position: absolute;
       bottom: 12vh;
+      /* Висота від низу екрана */
       left: 50%;
       transform: translateX(-50%);
-      width: 70vw;
-      /* Було 80-95, тепер вони ближче до середини */
+      width: 95vw;
+      /* Ширина як у тайтла */
       display: flex;
       justify-content: space-between;
+      /* Текст максимально зліва, кнопка максимально справа */
       align-items: flex-end;
-      z-index: 20;
+      z-index: 30;
       pointer-events: none;
+      /* Щоб не блокувало мишу для паралаксу */
     }
 
     .hero-subtitle,
     .hero-cta {
       pointer-events: auto;
-      opacity: 0;
+      position: relative;
     }
 
     /* Текст: у 1.5 рази більший */
     .hero-subtitle {
       text-align: left;
-      font-size: clamp(1.3rem, 2.2vw, 2.5rem);
-      line-height: 1.2;
+      font-size: clamp(1.2rem, 1.8vw, 2rem);
+      line-height: 1.3;
       font-weight: 500;
+      color: var(--text);
+      margin: 0;
+      opacity: 0;
       animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
     }
 
+    /* Кнопка: чітко справа */
     .hero-cta {
+      opacity: 0;
       animation: fadeRight 0.8s 1s var(--ease-out) forwards;
     }
 
@@ -293,38 +301,32 @@
       }
     }
 
-    /* Mobile */
-    /* Адаптив для мобілок */
-    @media (max-width: 1024px) {
-      .hero-avatar {
-        top: 60%;
-        /* Трохи опускаємо, якщо Title займає більше місця */
-        width: 50vw;
-        /* Робимо голову трохи більшою відносно екрана */
-      }
-    }
-
-    /* Мобільний (до 768px) */
     @media (max-width: 768px) {
-      .hero-avatar {
-        /* Піднімаємо голову вище, щоб звільнити місце знизу для тексту та кнопки */
-        top: 40%;
-        width: 70vw;
-        /* Оптимальна ширина для телефону */
+      .hero-content-inner {
+        flex-direction: column;
+        /* Ставимо один під одним */
+        align-items: center;
+        /* Центруємо контент */
+        justify-content: center;
+        bottom: 5vh;
+        /* Опускаємо нижче до краю */
+        gap: 1.5rem;
+        /* Відступ між текстом і кнопкою */
       }
 
-      /* На мобілці тінь можна ще зменшити, щоб не перевантажувати картинку */
-      .hero-avatar img {
-        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+      .hero-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        max-width: 80%;
+        /* Щоб текст не розлазився */
+      }
+
+      /* Піднімаємо голову вище, щоб вона не перекривала кнопки на мобілці */
+      .hero-avatar {
+        bottom: 15% !important;
+        width: 85vw !important;
       }
     }
-
-    /* Дуже малий мобільний (до 480px — старі айфони) */
-    @media (max-width: 480px) {
-      .hero-avatar {
-        width: 85vw;
-        /* Ще трохи ширше, щоб обличчя було помітним */
-      }
     }
   </style>
 </head>
