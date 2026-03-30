@@ -3,63 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO -->
-  <title>Your Name — Motion Designer & Developer</title>
-  <meta name="description" content="Motion Designer & Developer specializing in high-quality animation and interactive web experiences." />
-  <meta name="author" content="Your Name" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Your Name — Motion Designer & Developer" />
-  <meta property="og:description" content="Motion Designer & Developer specializing in high-quality animation and interactive web experiences." />
-  <meta property="og:image" content="/images/og-image.jpg" />
-  <meta property="og:url" content="https://yoursite.com" />
-  <meta property="og:type" content="website" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/src/styles/main.css" />
+  <title>HI, I'M PAVLO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/hero.css">
 </head>
 <body>
 
-  <!-- ─── HEADER / NAV ─────────────────────────────── -->
-  <header id="header">
-    <!-- буде заповнено після дизайну -->
-  </header>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-  <main>
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#customers">Customers</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <!-- ─── HERO ──────────────────────────────────── -->
-    <section id="hero">
-      <!-- буде заповнено після дизайну -->
-    </section>
+  <!-- Hero -->
+  <section id="hero">
 
-    <!-- ─── PROJECTS ──────────────────────────────── -->
-    <section id="projects">
-      <!-- буде заповнено після дизайну -->
-    </section>
+    <h1 class="hero-title" id="heroTitle">
+      <span id="l1">HI, I'M</span>
+      <span id="l2">PAVLO</span>
+    </h1>
 
-    <!-- ─── ABOUT ─────────────────────────────────── -->
-    <section id="about">
-      <!-- буде заповнено після дизайну -->
-    </section>
+    <div class="hero-avatar" id="avatar">
+      <!--
+        Як додати своє фото:
+        1. Поклади файл у public/images/avatar.png  (PNG з прозорим фоном)
+        2. Заміни рядок нижче:
+           <img src="public/images/avatar.png" alt="Pavlo">
+      -->
+      <img src="public/images/avatar.png" alt="Pavlo">
+    </div>
 
-    <!-- ─── CONTACT ───────────────────────────────── -->
-    <section id="contact">
-      <!-- буде заповнено після дизайну -->
-    </section>
+    <p class="hero-subtitle">
+      A motion designer<br>
+      passionate about crafting<br>
+      bold and memorable<br>
+      projects 🤙
+    </p>
 
-  </main>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-contact">Contact me</a>
+    </div>
 
-  <!-- ─── FOOTER ────────────────────────────────── -->
-  <footer id="footer">
-    <!-- буде заповнено після дизайну -->
-  </footer>
+  </section>
 
-  <!-- Scripts -->
-  <script type="module" src="/src/scripts/main.js"></script>
+  <script src="src/scripts/hero.js"></script>
 
 </body>
 </html>
