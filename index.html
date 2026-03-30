@@ -87,16 +87,18 @@
     }
 
     nav a {
-      font-size: 0.65rem;
-      font-weight: 400;
+      /* 1. БІЛЬШИЙ і БІЛИЙ */
+      font-size: 0.85rem;
+      font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--text);
+      /* білий завжди */
       text-decoration: none;
       display: flex;
       flex-direction: column;
       gap: 5px;
-      transition: color 0.2s;
+      transition: opacity 0.2s;
     }
 
     nav a::after {
@@ -112,7 +114,7 @@
     }
 
     nav a:hover {
-      color: var(--text);
+      opacity: 0.7;
     }
 
     nav a:hover::after {
@@ -128,21 +130,17 @@
       overflow: hidden;
     }
 
-    /* ── Title ── */
+    /* ── Title — вище (30% замість 50%) ── */
     .hero-title {
       position: absolute;
-      top: 50%;
+      top: 28%;
       left: 0;
       width: 100%;
       transform: translateY(-50%);
-      /* Центруємо тільки по вертикалі */
       z-index: 1;
-
       display: flex;
       justify-content: center;
-      /* Текст чітко по центру горизонталі */
       align-items: center;
-
       font-family: 'Bebas Neue', sans-serif;
       color: var(--text);
       user-select: none;
@@ -151,13 +149,13 @@
       animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
     }
 
-    /* Якщо текст розбитий на спани і ти хочеш їх один під одним */
     .hero-title span {
       display: block;
       text-align: center;
       width: 100%;
     }
 
+    /* ── Avatar ── */
     .hero-avatar {
       position: absolute;
       top: 50%;
@@ -178,23 +176,27 @@
       filter: drop-shadow(0 50px 100px rgba(0, 0, 0, 0.7));
     }
 
+    /* ── Subtitle — більший і білий ── */
     .hero-subtitle {
       position: absolute;
       left: clamp(2rem, 4vw, 4rem);
       top: 50%;
       transform: translateY(5%);
       z-index: 20;
-      max-width: 240px;
-      font-size: clamp(0.78rem, 1.1vw, 0.95rem);
-      font-weight: 300;
+      max-width: 260px;
+      /* 2. БІЛЬШИЙ */
+      font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+      font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1.8;
-      color: rgba(237, 234, 224, 0.55);
+      /* 2. БІЛИЙ */
+      color: var(--text);
       opacity: 0;
       animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
     }
 
+    /* ── CTA ── */
     .hero-cta {
       position: absolute;
       right: clamp(2rem, 4vw, 4rem);
@@ -343,12 +345,10 @@
       const title = document.getElementById('heroTitle')
       const l1 = document.getElementById('l1')
       const l2 = document.getElementById('l2')
-      const pl = parseFloat(getComputedStyle(title).paddingLeft)
-      const pr = parseFloat(getComputedStyle(title).paddingRight)
-      const avail = window.innerWidth - pl - pr
+      const avail = window.innerWidth
       title.style.fontSize = '100px'
       const longest = Math.max(l1.scrollWidth, l2.scrollWidth)
-      title.style.fontSize = Math.floor(100 * (avail / longest) * 0.985) + 'px'
+      title.style.fontSize = Math.floor(100 * (avail / longest) * 0.97) + 'px'
     }
     fitTitle()
     window.addEventListener('resize', fitTitle)
@@ -387,6 +387,7 @@
     })
 
     // ── Avatar parallax ──────────────────────────────
+    // 3. ГОЛОВА РУХАЄТЬСЯ ЗА МИШКОЮ
     const avatar = document.getElementById('avatar')
     let ax = 0, ay = 0, tx = 0, ty = 0
 
