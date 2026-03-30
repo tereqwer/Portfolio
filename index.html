@@ -133,21 +133,18 @@
     /* Title — прямо під nav */
     .hero-title {
       position: absolute;
-      left: 0;
-      width: 100%;
-      transform: translateY(-50%);
-      /* Центруємо тільки по вертикалі */
+      top: 7vh;
+      left: 3%;
+      transform: translateX(-50%);
+      /* Центруємо по горизонталі */
+      width: auto;
+      /* Важливо: ширина тільки по тексту */
+      white-space: nowrap;
       z-index: 1;
-
-      display: flex;
-      justify-content: center;
-      /* Текст чітко по центру горизонталі */
-      align-items: center;
-
       font-family: 'Bebas Neue', sans-serif;
       color: var(--text);
-      user-select: none;
-      white-space: nowrap;
+      line-height: 0.8;
+      text-align: center;
       opacity: 0;
       animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
     }
@@ -162,48 +159,55 @@
     /* Avatar — нижня половина екрану */
     .hero-avatar {
       position: absolute;
-      bottom: -5%;
+      bottom: -2%;
       left: 50%;
       transform: translateX(-50%);
-      width: clamp(360px, 48vw, 760px);
+      width: clamp(350px, 48vw, 85vh);
       z-index: 10;
       pointer-events: none;
       will-change: transform;
-      opacity: 0;
-      animation: fadeInAvatar 1s 0.7s var(--ease-out) forwards;
     }
 
     .hero-avatar img {
-      width: 100%;
+      width: 90%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.8));
+      /* Злегка зменшуємо тінь, щоб вона була акуратнішою на менших екранах */
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
     }
 
     /* Subtitle */
-    .hero-subtitle {
+    /* Головний контейнер для контенту під тайтлом */
+    .hero-content-inner {
       position: absolute;
-      left: clamp(14rem, 12vw, 12rem);
-      bottom: clamp(22rem, 12vh, 12rem);
+      bottom: 12vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70vw;
+      /* Було 80-95, тепер вони ближче до середини */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
       z-index: 20;
-      max-width: 460px;
-      font-size: clamp(1.4rem, 1.8vw, 1.4rem);
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      line-height: 1.8;
-      color: var(--text);
+      pointer-events: none;
+    }
+
+    .hero-subtitle,
+    .hero-cta {
+      pointer-events: auto;
       opacity: 0;
+    }
+
+    /* Текст: у 1.5 рази більший */
+    .hero-subtitle {
+      text-align: left;
+      font-size: clamp(1.3rem, 2.2vw, 2.5rem);
+      line-height: 1.2;
+      font-weight: 500;
       animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
     }
 
-    /* CTA */
     .hero-cta {
-      position: absolute;
-      right: clamp(2rem, 4vw, 4rem);
-      bottom: clamp(3rem, 8vh, 6rem);
-      z-index: 20;
-      opacity: 0;
       animation: fadeRight 0.8s 1s var(--ease-out) forwards;
     }
 
@@ -263,8 +267,6 @@
       to {
         opacity: 1;
       }
-
-      /* Тепер JS вільно керує трансформацією */
     }
 
     @keyframes fadeLeft {
@@ -292,17 +294,36 @@
     }
 
     /* Mobile */
-    @media (max-width: 700px) {
-      .hero-subtitle {
-        display: none;
+    /* Адаптив для мобілок */
+    @media (max-width: 1024px) {
+      .hero-avatar {
+        top: 60%;
+        /* Трохи опускаємо, якщо Title займає більше місця */
+        width: 50vw;
+        /* Робимо голову трохи більшою відносно екрана */
+      }
+    }
+
+    /* Мобільний (до 768px) */
+    @media (max-width: 768px) {
+      .hero-avatar {
+        /* Піднімаємо голову вище, щоб звільнити місце знизу для тексту та кнопки */
+        top: 40%;
+        width: 70vw;
+        /* Оптимальна ширина для телефону */
       }
 
-      .hero-cta {
-        left: 50%;
-        right: auto;
-        bottom: 2.5rem;
-        top: auto;
-        transform: translateX(-50%);
+      /* На мобілці тінь можна ще зменшити, щоб не перевантажувати картинку */
+      .hero-avatar img {
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+      }
+    }
+
+    /* Дуже малий мобільний (до 480px — старі айфони) */
+    @media (max-width: 480px) {
+      .hero-avatar {
+        width: 85vw;
+        /* Ще трохи ширше, щоб обличчя було помітним */
       }
     }
   </style>
@@ -317,41 +338,51 @@
     <a href="#about">About</a>
     <a href="#customers">Customers</a>
     <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact">Contacts</a>
   </nav>
 
   <section id="hero">
-    <h1 class="hero-title" id="heroTitle">
-      HI, I'M PAVLO
-    </h1>
+    <h1 class="hero-title" id="heroTitle">HI, I'M PAVLO</h1>
+
+    <div class="hero-content-inner">
+      <p class="hero-subtitle">
+        A motion designer<br>
+        passionate about crafting<br>
+        bold and memorable<br>
+        projects 🤙
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-contact">Contact me</a>
+      </div>
+    </div>
 
     <div class="hero-avatar" id="avatar">
       <img src="public/images/avatar.png" alt="Pavlo">
-    </div>
-
-    <p class="hero-subtitle">
-      A motion designer<br>
-      passionate about crafting<br>
-      bold and memorable<br>
-      projects 🤙
-    </p>
-
-    <div class="hero-cta">
-      <a href="#contact" class="btn-contact">Contact me</a>
     </div>
   </section>
 
   <script>
     // ── Fit title to full width ──────────────────────
     function fitTitle() {
-      const title = document.getElementById('heroTitle')
-      const avail = window.innerWidth - 16
-      title.style.fontSize = '100px'
-      const longest = title.scrollWidth
-      title.style.fontSize = Math.floor(500 * (avail / longest) * 0.97) + 'px'
+      const title = document.getElementById('heroTitle');
+      const avail = window.innerWidth * 0.95; // 95% ширини екрана
+
+      // Рахуємо відношення. 100px — база. 
+      // Ми ставимо фіксований розмір, міряємо скільки він займає, і масштабуємо.
+      title.style.fontSize = '100px';
+      const textWidth = title.getBoundingClientRect().width;
+
+      const newSize = (avail / textWidth) * 100;
+
+      // Ставимо новий розмір. Тепер він буде на весь екран.
+      title.style.fontSize = newSize + 'px';
     }
-    fitTitle()
-    window.addEventListener('resize', fitTitle)
+
+    // Виклик при старті та ресайзі
+    window.addEventListener('resize', fitTitle);
+    window.addEventListener('load', fitTitle);
+    fitTitle();
 
     // ── Cursor ───────────────────────────────────────
     const cursor = document.getElementById('cursor')
@@ -389,20 +420,28 @@
     // ── Avatar parallax ──────────────────────────────
     const avatar = document.getElementById('avatar')
     let ax = 0, ay = 0, tx = 0, ty = 0
+    const isMobile = window.matchMedia('(max-width: 700px)').matches
 
-    document.addEventListener('mousemove', e => {
-      const nx = (e.clientX / window.innerWidth - 0.5) * 2
-      const ny = (e.clientY / window.innerHeight - 0.5) * 2
-      tx = nx * 22
-      ty = ny * 12
-    })
-      ; (function loopAvatar() {
-        ax += (tx - ax) * 0.055
-        ay += (ty - ay) * 0.055
-        // base: translateX(-50%), додаємо offset зверху
-        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px)`
-        requestAnimationFrame(loopAvatar)
-      })()
+    if (!isMobile) {
+      document.addEventListener('mousemove', e => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2
+        // Збільшив амплітуду, щоб було видно рух
+        tx = nx * 50
+        ty = ny * 25
+      })
+
+        ; (function loopAvatar() {
+          ax += (tx - ax) * 0.08
+          ay += (ty - ay) * 0.08
+
+          // Обов'язково додаємо translateX(-50%), бо картинка центрована через цей хак
+          // rotateY додає "об'єму" при русі
+          avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${ax * 0.2}deg)`
+
+          requestAnimationFrame(loopAvatar)
+        })()
+    }
   </script>
 
 </body>
