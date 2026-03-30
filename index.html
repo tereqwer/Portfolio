@@ -180,19 +180,15 @@
     /* Головний контейнер для контенту під тайтлом */
     .hero-content-inner {
       position: absolute;
-      bottom: 12vh;
-      /* Висота від низу екрана */
+      bottom: 10vh;
       left: 50%;
       transform: translateX(-50%);
       width: 95vw;
-      /* Ширина як у тайтла */
       display: flex;
       justify-content: space-between;
-      /* Текст максимально зліва, кнопка максимально справа */
       align-items: flex-end;
       z-index: 30;
       pointer-events: none;
-      /* Щоб не блокувало мишу для паралаксу */
     }
 
     .hero-subtitle,
@@ -201,15 +197,12 @@
       position: relative;
     }
 
-    /* Текст: у 1.5 рази більший */
     .hero-subtitle {
       text-align: left;
-      font-size: clamp(1.2rem, 1.8vw, 2rem);
-      line-height: 1.3;
-      font-weight: 500;
-      color: var(--text);
-      margin: 0;
-      opacity: 0;
+      font-size: clamp(1.5rem, 2.8vw, 3rem);
+      /* Максимально жирний та великий шрифт */
+      line-height: 1.1;
+      font-weight: 600;
       animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
     }
 
@@ -222,19 +215,18 @@
     .btn-contact {
       display: inline-flex;
       align-items: center;
-      padding: 1.1rem 2.8rem;
+      padding: 1.5rem 4rem;
+      /* Збільшено площу кнопки */
       border-radius: 100px;
-      border: 1.5px solid rgba(237, 234, 224, 0.5);
+      border: 2px solid rgba(237, 234, 224, 0.6);
       background: transparent;
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 1.1rem;
+      /* Збільшено шрифт всередині */
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      cursor: none;
-      transition: border-color 0.3s, background 0.3s, transform 0.2s;
-      white-space: nowrap;
+      transition: all 0.3s ease;
     }
 
     .btn-contact:hover {
@@ -304,29 +296,22 @@
     @media (max-width: 768px) {
       .hero-content-inner {
         flex-direction: column;
-        /* Ставимо один під одним */
         align-items: center;
-        /* Центруємо контент */
-        justify-content: center;
+        gap: 2.5rem;
         bottom: 5vh;
-        /* Опускаємо нижче до краю */
-        gap: 1.5rem;
-        /* Відступ між текстом і кнопкою */
       }
 
       .hero-subtitle {
         text-align: center;
-        font-size: 1.1rem;
-        max-width: 80%;
-        /* Щоб текст не розлазився */
+        font-size: 1.4rem;
+        /* Оптимально для екрана телефону */
+        max-width: 90%;
       }
 
-      /* Піднімаємо голову вище, щоб вона не перекривала кнопки на мобілці */
-      .hero-avatar {
-        bottom: 15% !important;
-        width: 85vw !important;
+      .btn-contact {
+        padding: 1.2rem 3rem;
+        font-size: 0.9rem;
       }
-    }
     }
   </style>
 </head>
@@ -365,20 +350,23 @@
   </section>
 
   <script>
-    // ── Fit title to full width ──────────────────────
     function fitTitle() {
       const title = document.getElementById('heroTitle');
-      const avail = window.innerWidth * 0.95; // 95% ширини екрана
+      const avail = window.innerWidth * 0.95;
 
-      // Рахуємо відношення. 100px — база. 
-      // Ми ставимо фіксований розмір, міряємо скільки він займає, і масштабуємо.
+      // Крок 1: Скидаємо стилі для точного заміру
+      title.style.display = 'inline-block';
       title.style.fontSize = '100px';
+
+      // Крок 2: Міряємо ширину самих літер
       const textWidth = title.getBoundingClientRect().width;
 
+      // Крок 3: Розрахунок і застосування
       const newSize = (avail / textWidth) * 100;
-
-      // Ставимо новий розмір. Тепер він буде на весь екран.
       title.style.fontSize = newSize + 'px';
+
+      // Крок 4: Повертаємо центрування
+      title.style.display = 'flex';
     }
 
     // Виклик при старті та ресайзі
