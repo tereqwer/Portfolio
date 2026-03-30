@@ -9,6 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap"
     rel="stylesheet">
   <style>
+    html,
+    body,
+    #hero {
+      height: 100vh;
+      height: 100dvh;
+      /* Це змусить сторінку підлаштовуватись під зміну панелей Safari */
+    }
+
     *,
     *::before,
     *::after {
@@ -180,7 +188,7 @@
     /* Головний контейнер для контенту під тайтлом */
     .hero-content-inner {
       position: absolute;
-      bottom: 10vh;
+      bottom: 100px !important;
       left: 50%;
       transform: translateX(-50%);
       width: 95vw;
@@ -303,7 +311,7 @@
 
       /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
       .hero-avatar {
-        left: 55% !important;
+        left: 53% !important;
         bottom: 35% !important;
         /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
         width: 80vw !important;
