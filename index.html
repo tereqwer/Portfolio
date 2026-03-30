@@ -293,73 +293,56 @@
       }
     }
 
-    /* --- ADAPTIVITY — БЛОК ЗМІНЕНО ЧІТКО ЗА ЗАПИТОМ --- */
+    @media (max-width: 768px) {
 
-    @media (max-width: 700px) {
-      :root {
-        --nav-h: 56px;
-      }
-
-      nav {
-        justify-content: space-around;
-        padding: 0 1rem;
-      }
-
-      nav a {
-        font-size: 0.6rem;
-        letter-spacing: 0.12em;
-      }
-
+      /* Головний контейнер Title: піднімаємо трохи вище */
       .hero-title {
-        padding: 0 0.25rem;
+        top: 15% !important;
+        /* Фіксуємо вище, щоб звільнити місце */
       }
 
-      /* ТАЙТЛ ТРІШЕЧКИ ВИЩЕ */
-      .hero-title {
-        top: 10% !important;
-        /* Піднімаємо Title вище, щоб звільнити місце */
-      }
-
-      /* ГОЛОВА: ЦЕНТРУЄМО, ЗАБОРОНЯЄМО ПРОЗОРІСТЬ ТА ПІДНІМАЄМО */
+      /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
       .hero-avatar {
         left: 55% !important;
-        /* Силове центрування по горизонталі */
-        /* TRANSFORM: залиш паралакс JS (loopAvatar), він має жорстке центрування `calc(-50% + ${ax}px)` */
-
-        opacity: 1 !important;
-        /* ПОВНІСТЮ НЕПРОЗОРА (Прибрав opacity: 0.8/0.7) */
-
+        bottom: 35% !important;
+        /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
         width: 80vw !important;
         /* Ширина залиш, вона збс */
-        bottom: 25% !important;
-        /* Піднімаємо голову вище, щоб звільнити місце знизу (раніше було 35%, поставив 25% щоб було трішечки вище) */
+        opacity: 0.8 !important;
+        /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
       }
 
-      /* Контент (Текст і Кнопка) — нижче */
+      /* Контенту: текст і кнопка внизу */
       .hero-content-inner {
         flex-direction: column;
+        /* Стовпчик залиш */
         align-items: center;
-        gap: 1.5rem;
-        /* Компактний відступ */
-        bottom: 2.5rem !important;
-        /* Нижче до краю, як в твоєму початковому коді */
-        top: auto;
-        /* Прибираємо позицію по вертикалі */
-        transform: translateX(-50%);
-        /* По горизонталі залишаємо */
+        /* Центр залиш */
+        gap: 1.8rem;
+        /* Відступ трохи менше */
+        bottom: 5vh !important;
+        /* Нижче до краю залиш, щоб вони не заважали */
       }
 
-      /* Текст: компактний по центру */
+      /* Текст: робимо компактним */
       .hero-subtitle {
-        display: none;
-        /* Залиш, якщо ти його ховаєш на мобілці, або зроби text-align: center */
-        /* text-align: center; */
-        /* font-size: 0.9rem; */
+        text-align: center;
+        /* Центр */
+        font-size: 1.1rem !important;
+        /* Розмір залиш */
+        max-width: 90% !important;
+        /* Щоб не розлазився */
+        /* Фон і блур для читабельності */
+        background: rgba(8, 8, 8, 0.4);
+        padding: 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
       }
 
+      /* Кнопка: робимо акуратнішою */
       .btn-contact {
-        padding: 0.9rem 2rem;
-        font-size: 0.75rem;
+        padding: 1.1rem 2.5rem !important;
+        font-size: 0.85rem !important;
       }
     }
   </style>
