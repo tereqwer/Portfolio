@@ -389,6 +389,14 @@
         }
       }
 
+      /* Тільт тепер тільки для десктопів */
+      @media (hover: hover) {
+        .marquee-item:hover {
+          transform: scale(1.05) rotate(1.5deg);
+          z-index: 10;
+        }
+      }
+
       @media (max-width: 768px) {
         /* Головний контейнер Title: піднімаємо трохи вище */
         .hero-title {
@@ -436,6 +444,10 @@
 
         .marquee-item {
           width: 85vw; /* Майже на весь екран телефону */
+        }
+
+        .marquee-item:hover {
+          transform: none !important;
         }
         .marquee-container {
           gap: 15px;
@@ -604,26 +616,34 @@
 
       window.addEventListener("scroll", () => {
         const scrollPos = window.pageYOffset;
+        const isMobile = window.innerWidth <= 768;
 
-        // VARIABLE SPEED: Верхній ряд швидше (0.8), нижній повільніше (0.5)
-        const moveTop = scrollPos * 0.8;
-        const moveBottom = scrollPos * 0.5;
+        // ШВИДКІСТЬ: на десктопі 0.8/0.5, на мобілці 0.25/0.15 (повільніше)
+        const speedTop = isMobile ? 0.25 : 0.8;
+        const speedBottom = isMobile ? 0.15 : 0.5;
+
+        const moveTop = scrollPos * speedTop;
+        const moveBottom = scrollPos * speedBottom;
 
         if (rowTop) rowTop.style.transform = `translateX(-${moveTop}px)`;
         if (rowBottom)
           rowBottom.style.transform = `translateX(calc(-30% + ${moveBottom}px))`;
 
-        // ЕФЕКТ БЛЮРУ ПРИ СКРОЛІ
-        // Додаємо легкий блюр під час руху
-        rowTop.style.filter = "blur(2px)";
-        rowBottom.style.filter = "blur(2px)";
+        // БЛЮР: Тільки для десктопів
+        if (!isMobile) {
+          rowTop.style.filter = "blur(2px)";
+          rowBottom.style.filter = "blur(2px)";
 
-        // Очищаємо блюр, коли скрол зупинився
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          rowTop.style.filter = "blur(0)";
-          rowBottom.style.filter = "blur(0)";
-        }, 150); // Через 150мс після зупинки картинка стає чіткою
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            rowTop.style.filter = "blur(0)";
+            rowBottom.style.filter = "blur(0)";
+          }, 150);
+        } else {
+          // На мобільних блюр завжди 0
+          rowTop.style.filter = "none";
+          rowBottom.style.filter = "none";
+        }
       });
 
       // ── Cursor ───────────────────────────────────────
