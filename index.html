@@ -532,8 +532,12 @@
       }
 
       .about-description p {
-        max-width: 80% !important;
-        font-size: 0.2rem !important;
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+        line-height: 1.5;
+        /* Додай простору між рядками, щоб дрібний текст не злипався */
+        margin: 10px 0;
+        color: #fff;
       }
 
       .about-obj {
@@ -728,6 +732,7 @@
         </div>
       </div>
     </div>
+
   </section>
 
   <section id="about">
