@@ -720,28 +720,55 @@
       }
 
       /* Збільшуємо сам опис */
+      #about {
+        height: auto !important;
+        /* Скасовуємо 120vh, які створюють дірку */
+        min-height: 100vh;
+        padding: 50px 0;
+        display: block;
+        margin-top: -5vh;
+        /* Підтягуємо впритул до відосів */
+      }
+
+      .about-content {
+        position: relative;
+        top: 0;
+        transform: none;
+        width: 100%;
+        gap: 40px;
+      }
+
+      /* 2. РОБИМО ABOUT ЗДОРОВИМ */
+      .about-title-wrapper {
+        overflow: visible;
+        /* Щоб текст не обрізався рамкою */
+        width: 100%;
+      }
+
+      .about-title-svg {
+        /* Робимо SVG ширшим за екран на 60%, щоб слово розперло */
+        width: 160% !important;
+        margin-left: -30%;
+        /* Центруємо цей виліт */
+        height: auto;
+        transform: scale(1.2);
+        /* Фінальний дожим розміру */
+      }
+
+      .about-title-svg text {
+        /* Навалюємо розмір шрифту всередині SVG тільки для мобілки */
+        font-size: 550px !important;
+      }
+
+      /* 3. ОПИС (ТЕКСТ ПІД ЗАГОЛОВКОМ) */
       .about-description {
-        max-width: 100%;
-        padding: 0 10px;
+        padding: 0 25px;
       }
 
       .about-description p span {
-        /* Збільшуємо шрифт опису для мобілки */
-        font-size: clamp(1.3rem, 5vw, 1.8rem) !important;
-        line-height: 1.4;
-        font-weight: 400;
-      }
-
-      /* Якщо є кнопка в цьому розділі */
-      .btn-contact {
-        padding: 1.2rem 3rem;
-        font-size: 0.9rem;
-      }
-
-      /* Об'єкти на мобілці краще зменшити або розкидати далі */
-      .about-obj {
-        width: 120px;
-        height: 120px;
+        font-size: 26px !important;
+        /* Читабельний і солідний розмір */
+        line-height: 1.3;
       }
 
       /* Ховаємо об'єкти на моб для швидкості */
