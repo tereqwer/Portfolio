@@ -319,19 +319,11 @@
     .about-content {
       display: flex;
       flex-direction: column;
-      /* Ставить елементи один під одним */
       align-items: center;
-      /* Центрує по горизонталі */
-      justify-content: center;
-      text-align: center;
       width: 100%;
-      max-width: 1200px;
-      gap: 30px;
-      /* Відступ між заголовком і описом */
-      z-index: 10;
-      position: sticky;
-      top: 50%;
-      transform: translateY(-50%);
+      padding: 0 20px;
+      /* Відступи по боках для мобілок */
+      box-sizing: border-box;
     }
 
     .about-title-wrapper {
@@ -341,10 +333,9 @@
     }
 
     .about-description {
+      margin-top: 20px;
+      max-width: 900px;
       width: 100%;
-      max-width: 800px;
-      /* Обмежуємо ширину тексту, щоб не розповзався */
-      margin: 0 auto;
     }
 
     .about-title-svg {
@@ -384,8 +375,10 @@
     }
 
     .about-description p {
-      overflow: hidden;
-      line-height: 1.8;
+      font-size: clamp(1.1rem, 2.5vw, 2.2rem);
+      /* Гумовий шрифт */
+      line-height: 1.4;
+      margin: 10px 0;
     }
 
     .about-description p span {
@@ -524,81 +517,91 @@
 
     @media (max-width: 768px) {
       #about {
-        height: 110vh;
+        height: 120vh;
+        /* Трохи менше висоти для мобілок */
       }
 
-      .about-title {
-        -webkit-text-stroke: 1px #fff;
-      }
-
-      .about-obj {
-        display: none;
-      }
-
-      /* Ховаємо об'єкти на моб для швидкості */
-
-      /* Головний контейнер Title: піднімаємо трохи вище */
-      .hero-title {
-        top: 15% !important;
-        /* Фіксуємо вище, щоб звільнити місце */
-      }
-
-      /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
-      .hero-avatar {
-        left: 53% !important;
-        bottom: 35% !important;
-        /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
-        width: 80vw !important;
-        /* Ширина залиш, вона збс */
-        opacity: 0.8 !important;
-        /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
-      }
-
-      /* Контенту: текст і кнопка внизу */
-      .hero-content-inner {
-        flex-direction: column;
-        /* Стовпчик залиш */
-        align-items: center;
-        /* Центр залиш */
-        gap: 1.8rem;
-        /* Відступ трохи менше */
-        bottom: 10vh !important;
-        /* Нижче до краю залиш, щоб вони не заважали */
-      }
-
-      /* Текст: робимо компактним */
-      .hero-subtitle {
-        text-align: center;
-        /* Центр */
-        font-size: 1.1rem !important;
-        /* Розмір залиш */
-        max-width: 90% !important;
-        /* Щоб не розлазився */
-        /* Фон і блур для читабельності */
-        background: rgba(8, 8, 8, 0.4);
-        padding: 10px;
-        border-radius: 8px;
-        backdrop-filter: blur(4px);
-      }
-
-      .marquee-item {
-        width: 85vw;
-        /* Майже на весь екран телефону */
-      }
-
-      .marquee-item:hover {
-        transform: none !important;
-      }
-
-      .marquee-container {
+      .about-content {
         gap: 15px;
       }
 
-      /* Кнопка: робимо акуратнішою */
-      .btn-contact {
-        padding: 1.1rem 2.5rem !important;
-        font-size: 0.85rem !important;
+      /* Якщо об'єкти заважають читати текст на малому екрані — можна сховати 2 з 4 */
+      #obj3,
+      #obj4 {
+        display: none;
       }
+
+      .about-title-svg {
+        width: 120%;
+        /* Робимо заголовок трохи більшим за екран (виліт) для стилю */
+        margin-left: -10%;
+      }
+    }
+
+    /* Ховаємо об'єкти на моб для швидкості */
+
+    /* Головний контейнер Title: піднімаємо трохи вище */
+    .hero-title {
+      top: 15% !important;
+      /* Фіксуємо вище, щоб звільнити місце */
+    }
+
+    /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
+    .hero-avatar {
+      left: 53% !important;
+      bottom: 35% !important;
+      /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
+      width: 80vw !important;
+      /* Ширина залиш, вона збс */
+      opacity: 0.8 !important;
+      /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
+    }
+
+    /* Контенту: текст і кнопка внизу */
+    .hero-content-inner {
+      flex-direction: column;
+      /* Стовпчик залиш */
+      align-items: center;
+      /* Центр залиш */
+      gap: 1.8rem;
+      /* Відступ трохи менше */
+      bottom: 10vh !important;
+      /* Нижче до краю залиш, щоб вони не заважали */
+    }
+
+    /* Текст: робимо компактним */
+    .hero-subtitle {
+      text-align: center;
+      /* Центр */
+      font-size: 1.1rem !important;
+      /* Розмір залиш */
+      max-width: 90% !important;
+      /* Щоб не розлазився */
+      /* Фон і блур для читабельності */
+      background: rgba(8, 8, 8, 0.4);
+      padding: 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .marquee-item {
+      width: 85vw;
+      /* Майже на весь екран телефону */
+    }
+
+    .marquee-item:hover {
+      transform: none !important;
+    }
+
+    .marquee-container {
+      gap: 15px;
+    }
+
+    /* Кнопка: робимо акуратнішою */
+    .btn-contact {
+      padding: 1.1rem 2.5rem !important;
+      font-size: 0.85rem !important;
+    }
     }
   </style>
 </head>
