@@ -719,25 +719,29 @@
         font-size: 250px !important;
       }
 
-      #about {
-        height: 100vh;
+      /* Збільшуємо сам опис */
+      .about-description {
+        max-width: 100%;
+        padding: 0 10px;
       }
 
-      .about-title {
-        -webkit-text-stroke: 1px #fff;
+      .about-description p span {
+        /* Збільшуємо шрифт опису для мобілки */
+        font-size: clamp(1.3rem, 5vw, 1.8rem) !important;
+        line-height: 1.4;
+        font-weight: 400;
       }
 
-      .about-description p {
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-
-        line-height: 1.5;
-        /* Додай простору між рядками, щоб дрібний текст не злипався */
-        margin: 10px 0;
-        color: #fff;
+      /* Якщо є кнопка в цьому розділі */
+      .btn-contact {
+        padding: 1.2rem 3rem;
+        font-size: 0.9rem;
       }
 
+      /* Об'єкти на мобілці краще зменшити або розкидати далі */
       .about-obj {
-        display: none;
+        width: 120px;
+        height: 120px;
       }
 
       /* Ховаємо об'єкти на моб для швидкості */
