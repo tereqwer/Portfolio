@@ -719,56 +719,56 @@
         font-size: 250px !important;
       }
 
-      /* Збільшуємо сам опис */
       #about {
         height: auto !important;
-        /* Скасовуємо 120vh, які створюють дірку */
+        /* Скасовуємо фіксовану висоту */
         min-height: 100vh;
-        padding: 50px 0;
-        display: block;
-        margin-top: -5vh;
-        /* Підтягуємо впритул до відосів */
+        padding: 60px 0;
+        /* Адекватні відступи зверху/знизу */
+        display: flex;
+        align-items: center;
       }
 
       .about-content {
         position: relative;
         top: 0;
         transform: none;
+        /* Прибираємо центрування, яке створювало дивні відступи */
         width: 100%;
-        gap: 40px;
+        padding: 0 20px;
+        gap: 30px;
       }
 
-      /* 2. РОБИМО ABOUT ЗДОРОВИМ */
+      /* 2. ЗАГОЛОВОК СТРОГО В МЕЖАХ ЕКРАНА */
       .about-title-wrapper {
-        overflow: visible;
-        /* Щоб текст не обрізався рамкою */
         width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
       }
 
       .about-title-svg {
-        /* Робимо SVG ширшим за екран на 60%, щоб слово розперло */
-        width: 160% !important;
-        margin-left: -30%;
-        /* Центруємо цей виліт */
+        width: 100% !important;
+        /* Тільки ширина екрана */
         height: auto;
-        transform: scale(1.2);
-        /* Фінальний дожим розміру */
       }
 
       .about-title-svg text {
-        /* Навалюємо розмір шрифту всередині SVG тільки для мобілки */
-        font-size: 550px !important;
+        /* Збільшуємо шрифт всередині SVG, щоб літери були масивними */
+        font-size: 500px !important;
+        font-family: 'Bebas Neue', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
       }
 
-      /* 3. ОПИС (ТЕКСТ ПІД ЗАГОЛОВКОМ) */
-      .about-description {
-        padding: 0 25px;
-      }
-
+      /* 3. ТЕКСТ ОПИСУ */
       .about-description p span {
-        font-size: 26px !important;
-        /* Читабельний і солідний розмір */
+        font-size: 24px !important;
         line-height: 1.3;
+      }
+
+      .about-obj {
+        display: none;
       }
 
       /* Ховаємо об'єкти на моб для швидкості */
