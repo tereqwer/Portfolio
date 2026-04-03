@@ -456,6 +456,140 @@
       transform: scale(1.04);
     }
 
+    /* СЕКЦІЯ SERVICES */
+    #services {
+      background: #000;
+      /* Фон під закругленням */
+      min-height: 150vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Біла підкладка з закругленням */
+    .services-frame {
+      background: #fff;
+      border-radius: 40px 40px 0 0;
+      width: 100%;
+      min-height: 150vh;
+      padding: 100px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Заголовок SERVICES */
+    .services-title-wrapper {
+      width: 100%;
+      margin-bottom: 10vh;
+    }
+
+    .services-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .services-svg text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(150px, 25vw, 300px);
+      /* Адаптивний розмір */
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .serv-outline {
+      fill: none;
+      stroke: #000;
+      stroke-width: 0.5px;
+      vector-effect: non-scaling-stroke;
+      opacity: 0.15;
+    }
+
+    .serv-fill {
+      fill: #000;
+      opacity: 0;
+      /* Анімується через JS */
+    }
+
+    /* Список сервісів */
+    .services-list {
+      width: 75%;
+      /* 75% на десктопі */
+      max-width: 1400px;
+    }
+
+    .service-item {
+      width: 100%;
+      margin-bottom: 15vh;
+      /* Величезний відступ */
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .service-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 4vw;
+      padding-bottom: 30px;
+    }
+
+    /* Твій фінальний чек-ліст для цього блоку: */
+    .num-mask {
+      overflow: hidden;
+      display: block;
+      /* Додай цей рядок, щоб цифра не обрізалася по боках */
+      width: fit-content;
+    }
+
+    .service-num {
+      display: block;
+      /* Обов'язково для анімації */
+
+      /* РОЗМІР: Зробив ще більшим, щоб було солідно */
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      font-weight: bold;
+
+      /* КОЛІР: Ставимо залізобетонний чорний */
+      color: #000 !important;
+      line-height: 0.8;
+
+      /* Початковий стан для анімації */
+      transform: translateY(100%);
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    /* Коли JS додає клас active */
+    .service-item.active .service-num {
+      transform: translateY(0);
+    }
+
+    .service-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin: 0 0 20px 0;
+      color: #000;
+      line-height: 0.9;
+    }
+
+    .service-text p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1rem, 1.5vw, 1.4rem);
+      color: #333;
+      max-width: 550px;
+      line-height: 1.5;
+    }
+
+    .service-line {
+      width: 100%;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s ease 0.2s;
+    }
+
     /* ── Keyframes ── */
     @keyframes fadeDown {
       from {
@@ -523,8 +657,44 @@
     }
 
     @media (max-width: 768px) {
+
+      #services {
+        height: auto;
+        /* Для мобілок ставимо авто-висоту */
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .services-frame {
+        padding: 60px 0;
+        border-radius: 25px 25px 0 0;
+      }
+
+      .services-list {
+        width: 90%;
+        /* Більша ширина на мобілці */
+      }
+
+      .service-item {
+        margin-bottom: 10vh;
+      }
+
+      .service-content {
+        flex-direction: column;
+        /* Цифра над текстом */
+        gap: 15px;
+      }
+
+      .service-num {
+        font-size: 5rem;
+      }
+
+      .service-text h3 {
+        font-size: 3rem;
+      }
+
       #about {
-        height: 110vh;
+        height: 100vh;
       }
 
       .about-title {
@@ -757,6 +927,84 @@
     </div>
   </section>
 
+  <section id="services">
+    <div class="services-frame">
+      <div class="services-title-wrapper">
+        <svg viewBox="0 0 1500 400" class="services-svg">
+          <text x="50%" y="70%" text-anchor="middle" class="serv-outline">SERVICES</text>
+          <text x="50%" y="70%" text-anchor="middle" class="serv-fill" id="servFill">SERVICES</text>
+        </svg>
+      </div>
+
+      <div class="services-list">
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">01</span>
+            </div>
+            <div class="service-text">
+              <h3>2D Animation & Kinetic Typography</h3>
+              <p>Creating dynamic motion graphics and high-impact visual stories.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">02</span>
+            </div>
+            <div class="service-text">
+              <h3>3D Visualization & Product Demos</h3>
+              <p>High-end product rendering and functional 3D demonstrations.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">03</span>
+            </div>
+            <div class="service-text">
+              <h3>Logo Animation & Brand Identity</h3>
+              <p>Bringing brands to life through unique motion signatures.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">04</span>
+            </div>
+            <div class="service-text">
+              <h3>VFX & Post-Production</h3>
+              <p>Visual effects and seamless integration for cinematic content.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">05</span>
+            </div>
+            <div class="service-text">
+              <h3>UI/UX Motion Design</h3>
+              <p>Interactive prototypes and interface animations that feel natural.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script>
     function fitTitle() {
       const title = document.getElementById("heroTitle");
@@ -971,6 +1219,71 @@
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     })();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.getElementById('services');
+      const fill = document.getElementById('servFill');
+      const items = document.querySelectorAll('.service-item');
+
+      function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+      // 1. ПЛАВНА ЗАЛИВКА ТАЙТЛА "SERVICES"
+      window.addEventListener('scroll', () => {
+        if (!section || !fill) return;
+
+        const winH = window.innerHeight;
+        const secRect = section.getBoundingClientRect();
+
+        // Розрахунок: починає заливатись, коли верх секції піднявся на 40% екрана
+        // p стає 1, коли проскролили ще 50% висоти вікна
+        let p = clamp((winH - secRect.top - (winH * 0.4)) / (winH * 0.5), 0, 1);
+
+        fill.style.opacity = p;
+      }, { passive: true });
+
+      // 2. ПОЯВА ПУНКТІВ ТА ЦИФР (Intersection Observer)
+      const observerOptions = {
+        threshold: 0.15, // Спрацює, коли 15% пункту з'явиться в кадрі
+        rootMargin: "0px 0px -50px 0px" // Трішки раніше за фактичний край
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const item = entry.target;
+          const line = item.querySelector('.service-line');
+          const num = item.querySelector('.service-num');
+
+          if (entry.isIntersecting) {
+            // Додаємо клас active для CSS (якщо захочеш щось докрутити там)
+            item.classList.add('active');
+
+            // Анімуємо сам контейнер
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0) skewY(0deg)";
+
+            // Виганяємо цифру з маски
+            if (num) num.style.transform = "translateY(0)";
+
+            // Малюємо лінію
+            if (line) line.style.transform = "scaleX(1)";
+
+            // Якщо хочеш, щоб анімація спрацювала лише ОДИН РАЗ — розкоментуй рядок нижче:
+            // observer.unobserve(item);
+          } else {
+            // Якщо хочеш, щоб вони зникали назад, коли юзер скролить вгору
+            item.classList.remove('active');
+            item.style.opacity = "0";
+            item.style.transform = "translateY(100px) skewY(2deg)";
+            if (num) num.style.transform = "translateY(100%)";
+            if (line) line.style.transform = "scaleX(0)";
+          }
+        });
+      }, observerOptions);
+
+      items.forEach((item) => {
+        if (item) observer.observe(item);
+      });
+    });
   </script>
 </body>
 
