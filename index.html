@@ -319,11 +319,19 @@
     .about-content {
       display: flex;
       flex-direction: column;
+      /* Ставить елементи один під одним */
       align-items: center;
+      /* Центрує по горизонталі */
+      justify-content: center;
+      text-align: center;
       width: 100%;
-      padding: 0 20px;
-      /* Відступи по боках для мобілок */
-      box-sizing: border-box;
+      max-width: 1200px;
+      gap: 30px;
+      /* Відступ між заголовком і описом */
+      z-index: 10;
+      position: sticky;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .about-title-wrapper {
@@ -333,9 +341,10 @@
     }
 
     .about-description {
-      margin-top: 20px;
-      max-width: 900px;
       width: 100%;
+      max-width: 800px;
+      /* Обмежуємо ширину тексту, щоб не розповзався */
+      margin: 0 auto;
     }
 
     .about-title-svg {
@@ -375,10 +384,8 @@
     }
 
     .about-description p {
-      font-size: clamp(1.1rem, 2.5vw, 2.2rem);
-      /* Гумовий шрифт */
-      line-height: 1.4;
-      margin: 10px 0;
+      overflow: hidden;
+      line-height: 1.8;
     }
 
     .about-description p span {
@@ -517,91 +524,85 @@
 
     @media (max-width: 768px) {
       #about {
-        height: 120vh;
-        /* Трохи менше висоти для мобілок */
+        height: 110vh;
       }
 
-      .about-content {
-        gap: 15px;
+      .about-title {
+        -webkit-text-stroke: 1px #fff;
       }
 
-      /* Якщо об'єкти заважають читати текст на малому екрані — можна сховати 2 з 4 */
-      #obj3,
-      #obj4 {
+      .about-description {
+        max-width: 70% !important;
+      }
+
+      .about-obj {
         display: none;
       }
 
-      .about-title-svg {
-        width: 120%;
-        /* Робимо заголовок трохи більшим за екран (виліт) для стилю */
-        margin-left: -10%;
+      /* Ховаємо об'єкти на моб для швидкості */
+
+      /* Головний контейнер Title: піднімаємо трохи вище */
+      .hero-title {
+        top: 15% !important;
+        /* Фіксуємо вище, щоб звільнити місце */
       }
-    }
 
-    /* Ховаємо об'єкти на моб для швидкості */
+      /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
+      .hero-avatar {
+        left: 53% !important;
+        bottom: 35% !important;
+        /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
+        width: 80vw !important;
+        /* Ширина залиш, вона збс */
+        opacity: 0.8 !important;
+        /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
+      }
 
-    /* Головний контейнер Title: піднімаємо трохи вище */
-    .hero-title {
-      top: 15% !important;
-      /* Фіксуємо вище, щоб звільнити місце */
-    }
+      /* Контенту: текст і кнопка внизу */
+      .hero-content-inner {
+        flex-direction: column;
+        /* Стовпчик залиш */
+        align-items: center;
+        /* Центр залиш */
+        gap: 1.8rem;
+        /* Відступ трохи менше */
+        bottom: 10vh !important;
+        /* Нижче до краю залиш, щоб вони не заважали */
+      }
 
-    /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
-    .hero-avatar {
-      left: 53% !important;
-      bottom: 35% !important;
-      /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
-      width: 80vw !important;
-      /* Ширина залиш, вона збс */
-      opacity: 0.8 !important;
-      /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
-    }
+      /* Текст: робимо компактним */
+      .hero-subtitle {
+        text-align: center;
+        /* Центр */
+        font-size: 1.1rem !important;
+        /* Розмір залиш */
+        max-width: 90% !important;
+        /* Щоб не розлазився */
+        /* Фон і блур для читабельності */
+        background: rgba(8, 8, 8, 0.4);
+        padding: 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+      }
 
-    /* Контенту: текст і кнопка внизу */
-    .hero-content-inner {
-      flex-direction: column;
-      /* Стовпчик залиш */
-      align-items: center;
-      /* Центр залиш */
-      gap: 1.8rem;
-      /* Відступ трохи менше */
-      bottom: 10vh !important;
-      /* Нижче до краю залиш, щоб вони не заважали */
-    }
+      .marquee-item {
+        width: 85vw;
+        /* Майже на весь екран телефону */
+      }
 
-    /* Текст: робимо компактним */
-    .hero-subtitle {
-      text-align: center;
-      /* Центр */
-      font-size: 1.1rem !important;
-      /* Розмір залиш */
-      max-width: 90% !important;
-      /* Щоб не розлазився */
-      /* Фон і блур для читабельності */
-      background: rgba(8, 8, 8, 0.4);
-      padding: 10px;
-      border-radius: 8px;
-      backdrop-filter: blur(4px);
-    }
+      .marquee-item:hover {
+        transform: none !important;
+      }
 
-    .marquee-item {
-      width: 85vw;
-      /* Майже на весь екран телефону */
-    }
+      .marquee-container {
+        gap: 15px;
+      }
 
-    .marquee-item:hover {
-      transform: none !important;
-    }
-
-    .marquee-container {
-      gap: 15px;
-    }
-
-    /* Кнопка: робимо акуратнішою */
-    .btn-contact {
-      padding: 1.1rem 2.5rem !important;
-      font-size: 0.85rem !important;
-    }
+      /* Кнопка: робимо акуратнішою */
+      .btn-contact {
+        padding: 1.1rem 2.5rem !important;
+        font-size: 0.85rem !important;
+      }
     }
   </style>
 </head>
@@ -887,42 +888,74 @@
         document.getElementById("line2"),
       ];
 
-      // Коефіцієнт для мобілок (якщо ширина < 768px, зменшуємо рух у 2.5 рази)
-      const m = window.innerWidth < 768 ? 0.4 : 1;
-
       const objs = [
-        { el: document.getElementById("obj1"), speed: 1, fromY: -180 * m, fromX: -160 * m, rot: -15 },
-        { el: document.getElementById("obj2"), speed: 0.8, fromY: -220 * m, fromX: 180 * m, rot: 20 },
-        { el: document.getElementById("obj3"), speed: 0.5, fromY: -160 * m, fromX: 140 * m, rot: -10 },
-        { el: document.getElementById("obj4"), speed: 0.3, fromY: -200 * m, fromX: -130 * m, rot: 12 },
+        // Дуже швидкий (вилетить першим)
+        {
+          el: document.getElementById("obj1"),
+          speed: 1,
+          fromY: -180,
+          fromX: -160,
+          rot: -15,
+        },
+
+        // Середній
+        {
+          el: document.getElementById("obj2"),
+          speed: 0.8,
+          fromY: -220,
+          fromX: 180,
+          rot: 20,
+        },
+
+        // Повільний (буде плавно "доповзати")
+        {
+          el: document.getElementById("obj3"),
+          speed: 0.5,
+          fromY: -160,
+          fromX: 140,
+          rot: -10,
+        },
+
+        // Дуже повільний (почне рух останнім)
+        {
+          el: document.getElementById("obj4"),
+          speed: 0.3,
+          fromY: -200,
+          fromX: -130,
+          rot: 12,
+        },
       ];
 
-      function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
-      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function clamp(v, lo, hi) {
+        return Math.min(Math.max(v, lo), hi);
+      }
+      function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
 
       function onScroll() {
         const rect = section.getBoundingClientRect();
         const winH = window.innerHeight;
 
-        // Адаптивний офсет: на мобілках winH менший, тому 0.7 працює норм
-        const offset = winH * 0.7;
+        // p = 0 коли верх секції тільки з'явився знизу екрану (rect.top === winH)
+        // p = 1 коли верх секції дійшов до середини екрану (rect.top === winH * 0.5)
+        const offset = winH * 0.7; // 30% екрана треба проскролити в "пусту", щоб почалось
         const p = clamp((winH - rect.top - offset) / (winH * 0.4), 0, 1);
 
-        // 1. Title
-        if (fill) fill.style.opacity = easeOut(clamp((p - 0.2) * 1.5, 0, 1));
+        // 1. Title — одразу швидко
+        fill.style.opacity = easeOut(clamp((p - 0.3) * 1.5, 0, 1));
 
-        // 2. Рядки (зменшуємо translateX для мобілок через m)
+        // 2. Рядки — зліва направо під кутом, clip-path на span
         lines.forEach((line, i) => {
-          if (!line) return;
-          const lp = clamp((p - 0.2 - i * 0.1) / 0.5, 0, 1);
+          const lp = clamp((p - 0.2 - i * 0.15) / 0.5, 0, 1);
           const lep = easeOut(lp);
-          line.style.transform = `translateX(${(1 - lep) * -50 * m}px) translateY(${(1 - lep) * 40 * m}px) skewX(${(1 - lep) * -10}deg)`;
+          // виїжджає знизу-зліва під кутом
+          line.style.transform = `translateX(${(1 - lep) * -80}px) translateY(${(1 - lep) * 60}px) skewX(${(1 - lep) * -15}deg)`;
           line.style.opacity = lep;
         });
 
         // 3. Об'єкти
         objs.forEach(({ el, speed, fromY, fromX, rot }) => {
-          if (!el) return;
           const ep = easeOut(clamp(p * speed * 1.5, 0, 1));
           el.style.transform = `translate(${fromX * (1 - ep)}px, ${fromY * (1 - ep)}px) rotate(${rot * (1 - ep)}deg)`;
           el.style.opacity = ep;
