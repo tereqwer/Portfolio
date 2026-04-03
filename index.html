@@ -1,715 +1,1290 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pavlo Tereshchuk — Motion Designer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      #hero {
-        height: 100vh;
-        height: 100dvh;
-        position: relative;
-      }
 
-      /* Окремо для html та body прибираємо фіксовану висоту */
-      html,
-      body {
-        width: 100%;
-        min-height: 100%; /* Тепер body може рости вниз */
-        background: var(--bg);
-        overflow-x: hidden;
-        overflow-y: auto;
-        cursor: none;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pavlo Tereshchuk — Motion Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    #hero {
+      height: 100vh;
+      height: 100dvh;
+      position: relative;
+    }
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+    /* Окремо для html та body прибираємо фіксовану висоту */
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      /* Тепер body може рости вниз */
+      background: var(--bg);
+      overflow-x: hidden;
+      overflow-y: auto;
+      cursor: none;
+    }
 
-      :root {
-        --bg: #080808;
-        --text: #edeae0;
-        --accent-grad: linear-gradient(
-          135deg,
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #080808;
+      --text: #edeae0;
+      --accent-grad: linear-gradient(135deg,
           #a259ff 0%,
           #ff6b6b 50%,
-          #ffa500 100%
-        );
-        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-        --nav-h: 64px;
-      }
+          #ffa500 100%);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --nav-h: 64px;
+    }
 
-      html,
-      body {
-        width: 100%;
-        /* min-height замість height, щоб контент міг рости вниз */
-        min-height: 100%;
-        background: var(--bg);
-        color: var(--text);
-        font-family: "DM Sans", sans-serif;
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+      /* Ховаємо горизонтальний скрол стрічок */
+      overflow-y: auto;
+      /* Вмикаємо вертикальний скрол сайту */
+      cursor: none;
+      scroll-behavior: smooth;
+    }
 
-        /* Дозволяємо вертикальний скрол, але ховаємо горизонтальний, 
-      щоб твої довгі стрічки з відео не розширювали сторінку вбік */
-        overflow-x: hidden;
-        overflow-y: auto;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 999;
+    }
 
-        cursor: none;
+    /* ── Cursor ── */
+    .cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--text);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease;
+    }
 
-        /* Додаємо для плавності скролу, якщо не використовуєш сторонні ліби */
-        scroll-behavior: smooth;
-      }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(237, 234, 224, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition:
+        width 0.25s ease,
+        height 0.25s ease,
+        opacity 0.25s ease;
+    }
 
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        opacity: 0.03;
-        pointer-events: none;
-        z-index: 999;
-      }
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(2rem, 4vw, 4rem);
+      opacity: 0;
+      animation: fadeDown 0.7s 0.1s var(--ease-out) forwards;
+    }
 
-      /* ── Cursor ── */
-      .cursor {
-        position: fixed;
-        width: 8px;
-        height: 8px;
-        background: var(--text);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        mix-blend-mode: difference;
-        transition: transform 0.1s ease;
-      }
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: opacity 0.2s;
+    }
 
-      .cursor-ring {
-        position: fixed;
-        width: 32px;
-        height: 32px;
-        border: 1px solid rgba(237, 234, 224, 0.3);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
-        transform: translate(-50%, -50%);
-        transition:
-          width 0.25s ease,
-          height 0.25s ease,
-          opacity 0.25s ease;
-      }
+    nav a::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: var(--text);
+      width: 100%;
+      transform: scaleX(0.4);
+      transform-origin: left;
+      transition:
+        transform 0.3s var(--ease-out),
+        opacity 0.3s;
+      opacity: 0.35;
+    }
 
-      /* ── Nav ── */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 200;
-        height: var(--nav-h);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 clamp(2rem, 4vw, 4rem);
+    nav a:hover {
+      opacity: 0.65;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Title — прямо під nav */
+    .hero-title {
+      position: absolute;
+      top: 7vh;
+      left: 3%;
+      transform: translateX(-50%);
+      /* Центруємо по горизонталі */
+      width: auto;
+      /* Важливо: ширина тільки по тексту */
+      white-space: nowrap;
+      z-index: 1;
+      font-family: "Bebas Neue", sans-serif;
+      color: var(--text);
+      line-height: 0.8;
+      text-align: center;
+      opacity: 0;
+      animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
+    }
+
+    /* Якщо текст розбитий на спани і ти хочеш їх один під одним */
+    .hero-title span {
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Avatar — нижня половина екрану */
+    .hero-avatar {
+      position: absolute;
+      bottom: -2%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(350px, 48vw, 85vh);
+      z-index: 10;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .hero-avatar img {
+      width: 90%;
+      height: auto;
+      display: block;
+      /* Злегка зменшуємо тінь, щоб вона була акуратнішою на менших екранах */
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
+    }
+
+    /* Subtitle */
+    /* Головний контейнер для контенту під тайтлом */
+    .hero-content-inner {
+      position: absolute;
+      bottom: 10vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .hero-subtitle,
+    .hero-cta {
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .hero-subtitle {
+      text-align: left;
+      font-size: clamp(1.5rem, 2.8vw, 3rem);
+      /* Максимально жирний та великий шрифт */
+      line-height: 1.1;
+      font-weight: 600;
+      animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
+    }
+
+    /* Кнопка: чітко справа */
+    .hero-cta {
+      opacity: 0;
+      animation: fadeRight 0.8s 1s var(--ease-out) forwards;
+    }
+
+    /* customers section */
+    #customers {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--bg);
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .marquee-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      /* Менше простору між рядами */
+      width: 100%;
+    }
+
+    .marquee-row {
+      display: flex;
+      gap: 15px;
+      /* Менше простору між відосами */
+      width: max-content;
+      will-change: transform;
+      transition:
+        filter 0.8s ease-out,
+        transform 0.1s linear;
+    }
+
+    /* Коли секція активна — блюр зникає (клас додамо через JS) */
+    .marquee-row.active {
+      filter: blur(0);
+    }
+
+    .marquee-item {
+      /* Збільшив розмір на десктопі */
+      width: clamp(400px, 40vw, 650px);
+      aspect-ratio: 16 / 10;
+      background: #151515;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.4s var(--ease-out);
+      cursor: none;
+    }
+
+    /* TILT ЕФЕКТ ПРИ НАВЕДЕННІ */
+    .marquee-item:hover {
+      transform: scale(1.08) rotate(2deg);
+      z-index: 10;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .marquee-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    #about {
+      position: relative;
+      width: 100vw;
+      height: 120vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #080808;
+      overflow: hidden;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      /* Ставить елементи один під одним */
+      align-items: center;
+      /* Центрує по горизонталі */
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+      gap: 30px;
+      /* Відступ між заголовком і описом */
+      z-index: 10;
+      position: sticky;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .about-title-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-description {
+      width: 100%;
+      max-width: 800px;
+      /* Обмежуємо ширину тексту, щоб не розповзався */
+      margin: 0 auto;
+    }
+
+    .about-title-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .svg-outline,
+    .svg-fill {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 450px;
+      /* Твій розмір */
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .svg-outline {
+      fill: none;
+      stroke: #fff;
+      /* 1. Завжди 1px, незалежно від розміру тексту */
+      stroke-width: 1px;
+      vector-effect: non-scaling-stroke;
+
+      /* 2. Малюємо тільки зовні (наскільки це можливо в SVG) */
+      stroke-linejoin: round;
+      paint-order: fill stroke;
+
+      opacity: 0.4;
+    }
+
+    .svg-fill {
+      fill: #fff;
+      opacity: 0;
+      /* Прибираємо обводку на шарі заливки, щоб не було "бруду" */
+      stroke: none;
+    }
+
+    .about-description p {
+      overflow: hidden;
+      line-height: 1.8;
+    }
+
+    .about-description p span {
+      display: inline-block;
+      font-family: "DM Sans", sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.55rem);
+      font-weight: 300;
+      color: #edeae0;
+      transform: translateY(100%) skewX(-10deg);
+      opacity: 0;
+      will-change: transform, opacity;
+      font-size: 28px;
+    }
+
+    /* ── Об'єкти ── */
+    .about-obj {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      z-index: 5;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .about-obj.o1 {
+      top: 8%;
+      left: 4%;
+    }
+
+    .about-obj.o2 {
+      top: 20%;
+      right: 8%;
+    }
+
+    .about-obj.o3 {
+      top: 40%;
+      right: 22%;
+    }
+
+    .about-obj.o4 {
+      top: 62%;
+      left: 18%;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      /* Збільшено площу кнопки */
+      border-radius: 100px;
+      border: 2px solid rgba(237, 234, 224, 0.6);
+      background: transparent;
+      color: var(--text);
+      font-size: 1.1rem;
+      /* Збільшено шрифт всередині */
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .btn-contact:hover {
+      border-color: transparent;
+      background: var(--accent-grad);
+      transform: scale(1.04);
+    }
+
+    /* СЕКЦІЯ SERVICES */
+    #services {
+      background: #000;
+      /* Фон під закругленням */
+      min-height: 150vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Біла підкладка з закругленням */
+    .services-frame {
+      background: #fff;
+      border-radius: 40px 40px 0 0;
+      width: 100%;
+      min-height: 150vh;
+      padding: 100px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Заголовок SERVICES */
+    .services-title-wrapper {
+      width: 100%;
+      margin-bottom: 10vh;
+    }
+
+    .services-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .services-svg text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(150px, 25vw, 300px);
+      /* Адаптивний розмір */
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .serv-outline {
+      fill: none;
+      stroke: #000;
+      stroke-width: 0.5px;
+      vector-effect: non-scaling-stroke;
+      opacity: 0.15;
+    }
+
+    .serv-fill {
+      fill: #000;
+      opacity: 0;
+      /* Анімується через JS */
+    }
+
+    /* Список сервісів */
+    .services-list {
+      width: 75%;
+      /* 75% на десктопі */
+      max-width: 1400px;
+    }
+
+    .service-item {
+      width: 100%;
+      margin-bottom: 15vh;
+      /* Величезний відступ */
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .service-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 4vw;
+      padding-bottom: 30px;
+    }
+
+    /* Твій фінальний чек-ліст для цього блоку: */
+    .num-mask {
+      overflow: hidden;
+      display: block;
+      /* Додай цей рядок, щоб цифра не обрізалася по боках */
+      width: fit-content;
+    }
+
+    .service-num {
+      display: block;
+      /* Обов'язково для анімації */
+
+      /* РОЗМІР: Зробив ще більшим, щоб було солідно */
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      font-weight: bold;
+
+      /* КОЛІР: Ставимо залізобетонний чорний */
+      color: #000 !important;
+      line-height: 0.8;
+
+      /* Початковий стан для анімації */
+      transform: translateY(100%);
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    /* Коли JS додає клас active */
+    .service-item.active .service-num {
+      transform: translateY(0);
+    }
+
+    .service-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin: 0 0 20px 0;
+      color: #000;
+      line-height: 0.9;
+    }
+
+    .service-text p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1rem, 1.5vw, 1.4rem);
+      color: #333;
+      max-width: 550px;
+      line-height: 1.5;
+    }
+
+    .service-line {
+      width: 100%;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s ease 0.2s;
+    }
+
+    /* ── Keyframes ── */
+    @keyframes fadeDown {
+      from {
         opacity: 0;
-        animation: fadeDown 0.7s 0.1s var(--ease-out) forwards;
+        transform: translateY(-16px);
       }
 
-      nav a {
-        font-size: 0.85rem;
-        font-weight: 500;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text);
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        transition: opacity 0.2s;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
       }
 
-      nav a::after {
-        content: "";
-        display: block;
-        height: 1px;
-        background: var(--text);
-        width: 100%;
-        transform: scaleX(0.4);
-        transform-origin: left;
-        transition:
-          transform 0.3s var(--ease-out),
-          opacity 0.3s;
-        opacity: 0.35;
-      }
-
-      nav a:hover {
-        opacity: 0.65;
-      }
-
-      nav a:hover::after {
-        transform: scaleX(1);
+      to {
         opacity: 1;
       }
+    }
 
-      /* ── Hero ── */
-      #hero {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      /* Title — прямо під nav */
-      .hero-title {
-        position: absolute;
-        top: 7vh;
-        left: 3%;
-        transform: translateX(-50%);
-        /* Центруємо по горизонталі */
-        width: auto;
-        /* Важливо: ширина тільки по тексту */
-        white-space: nowrap;
-        z-index: 1;
-        font-family: "Bebas Neue", sans-serif;
-        color: var(--text);
-        line-height: 0.8;
-        text-align: center;
+    @keyframes fadeInAvatar {
+      from {
         opacity: 0;
-        animation: fadeDown 0.9s 0.35s var(--ease-out) forwards;
+        transform: translateX(-50%) translateY(30px);
       }
 
-      /* Якщо текст розбитий на спани і ти хочеш їх один під одним */
-      .hero-title span {
-        display: block;
-        text-align: center;
-        width: 100%;
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-14px);
       }
 
-      /* Avatar — нижня половина екрану */
-      .hero-avatar {
-        position: absolute;
-        bottom: -2%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: clamp(350px, 48vw, 85vh);
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeRight {
+      from {
+        opacity: 0;
+        transform: translateX(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Тільт тепер тільки для десктопів */
+    @media (hover: hover) {
+      .marquee-item:hover {
+        transform: scale(1.05) rotate(1.5deg);
         z-index: 10;
-        pointer-events: none;
-        will-change: transform;
       }
+    }
 
-      .hero-avatar img {
-        width: 90%;
+    @media (max-width: 768px) {
+
+      #services {
         height: auto;
-        display: block;
-        /* Злегка зменшуємо тінь, щоб вона була акуратнішою на менших екранах */
-        filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
+        /* Для мобілок ставимо авто-висоту */
+        padding-top: 50px;
+        padding-bottom: 50px;
       }
 
-      /* Subtitle */
-      /* Головний контейнер для контенту під тайтлом */
-      .hero-content-inner {
-        position: absolute;
-        bottom: 10vh;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 95vw;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        z-index: 30;
-        pointer-events: none;
+      .services-frame {
+        padding: 60px 0;
+        border-radius: 25px 25px 0 0;
       }
 
-      .hero-subtitle,
-      .hero-cta {
-        pointer-events: auto;
-        position: relative;
+      .services-list {
+        width: 90%;
+        /* Більша ширина на мобілці */
       }
 
-      .hero-subtitle {
-        text-align: left;
-        font-size: clamp(1.5rem, 2.8vw, 3rem);
-        /* Максимально жирний та великий шрифт */
-        line-height: 1.1;
-        font-weight: 600;
-        animation: fadeLeft 0.8s 1s var(--ease-out) forwards;
+      .service-item {
+        margin-bottom: 10vh;
       }
 
-      /* Кнопка: чітко справа */
-      .hero-cta {
-        opacity: 0;
-        animation: fadeRight 0.8s 1s var(--ease-out) forwards;
-      }
-
-      #customers {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
+      .service-content {
         flex-direction: column;
-        justify-content: center;
-        background: var(--bg);
-        overflow: hidden;
-        z-index: 100;
+        /* Цифра над текстом */
+        gap: 15px;
+      }
+
+      .service-num {
+        font-size: 5rem;
+      }
+
+      .service-text h3 {
+        font-size: 3rem;
+      }
+
+      #about {
+        height: 100vh;
+      }
+
+      .about-title {
+        -webkit-text-stroke: 1px #fff;
+      }
+
+      .about-description p {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+        line-height: 1.5;
+        /* Додай простору між рядками, щоб дрібний текст не злипався */
+        margin: 10px 0;
+        color: #fff;
+      }
+
+      .about-obj {
+        display: none;
+      }
+
+      /* Ховаємо об'єкти на моб для швидкості */
+
+      /* Головний контейнер Title: піднімаємо трохи вище */
+      .hero-title {
+        top: 15% !important;
+        /* Фіксуємо вище, щоб звільнити місце */
+      }
+
+      /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
+      .hero-avatar {
+        left: 53% !important;
+        bottom: 35% !important;
+        /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
+        width: 80vw !important;
+        /* Ширина залиш, вона збс */
+        opacity: 0.8 !important;
+        /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
+      }
+
+      /* Контенту: текст і кнопка внизу */
+      .hero-content-inner {
+        flex-direction: column;
+        /* Стовпчик залиш */
+        align-items: center;
+        /* Центр залиш */
+        gap: 1.8rem;
+        /* Відступ трохи менше */
+        bottom: 10vh !important;
+        /* Нижче до краю залиш, щоб вони не заважали */
+      }
+
+      /* Текст: робимо компактним */
+      .hero-subtitle {
+        text-align: center;
+        /* Центр */
+        font-size: 1.1rem !important;
+        /* Розмір залиш */
+        max-width: 90% !important;
+        /* Щоб не розлазився */
+        /* Фон і блур для читабельності */
+        background: rgba(8, 8, 8, 0.4);
+        padding: 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(4px);
+      }
+
+      .marquee-item {
+        width: 85vw;
+        /* Майже на весь екран телефону */
+      }
+
+      .marquee-item:hover {
+        transform: none !important;
       }
 
       .marquee-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px; /* Менше простору між рядами */
-        width: 100%;
+        gap: 15px;
       }
 
-      .marquee-row {
-        display: flex;
-        gap: 15px; /* Менше простору між відосами */
-        width: max-content;
-        will-change: transform;
-        transition:
-          filter 0.8s ease-out,
-          transform 0.1s linear;
-      }
-
-      /* Коли секція активна — блюр зникає (клас додамо через JS) */
-      .marquee-row.active {
-        filter: blur(0);
-      }
-      .marquee-item {
-        /* Збільшив розмір на десктопі */
-        width: clamp(400px, 40vw, 650px);
-        aspect-ratio: 16 / 10;
-        background: #151515;
-        border-radius: 20px;
-        overflow: hidden;
-        flex-shrink: 0;
-        transition: transform 0.4s var(--ease-out);
-        cursor: none;
-      }
-
-      /* TILT ЕФЕКТ ПРИ НАВЕДЕННІ */
-      .marquee-item:hover {
-        transform: scale(1.08) rotate(2deg);
-        z-index: 10;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-      }
-
-      .marquee-item video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-      }
-
+      /* Кнопка: робимо акуратнішою */
       .btn-contact {
-        display: inline-flex;
-        align-items: center;
-        padding: 1.5rem 4rem;
-        /* Збільшено площу кнопки */
-        border-radius: 100px;
-        border: 2px solid rgba(237, 234, 224, 0.6);
-        background: transparent;
-        color: var(--text);
-        font-size: 1.1rem;
-        /* Збільшено шрифт всередині */
-        font-weight: 600;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
+        padding: 1.1rem 2.5rem !important;
+        font-size: 0.85rem !important;
       }
+    }
+  </style>
+</head>
 
-      .btn-contact:hover {
-        border-color: transparent;
-        background: var(--accent-grad);
-        transform: scale(1.04);
-      }
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-      /* ── Keyframes ── */
-      @keyframes fadeDown {
-        from {
-          opacity: 0;
-          transform: translateY(-16px);
-        }
+  <nav>
+    <a href="#about">About</a>
+    <a href="#customers">Customers</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contacts</a>
+  </nav>
 
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+  <section id="hero">
+    <h1 class="hero-title" id="heroTitle">HI, I'M PAVLO</h1>
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
+    <div class="hero-content-inner">
+      <p class="hero-subtitle">
+        A motion designer<br />
+        passionate about crafting<br />
+        bold and memorable<br />
+        projects 🤙
+      </p>
 
-        to {
-          opacity: 1;
-        }
-      }
+      <div class="hero-cta">
+        <a href="#contact" class="btn-contact">Contact me</a>
+      </div>
+    </div>
 
-      @keyframes fadeInAvatar {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(30px);
-        }
+    <div class="hero-avatar" id="avatar">
+      <img src="public/images/avatar.png" alt="Pavlo" />
+    </div>
+  </section>
 
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes fadeLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-14px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes fadeRight {
-        from {
-          opacity: 0;
-          transform: translateX(14px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      /* Тільт тепер тільки для десктопів */
-      @media (hover: hover) {
-        .marquee-item:hover {
-          transform: scale(1.05) rotate(1.5deg);
-          z-index: 10;
-        }
-      }
-
-      @media (max-width: 768px) {
-        /* Головний контейнер Title: піднімаємо трохи вище */
-        .hero-title {
-          top: 15% !important;
-          /* Фіксуємо вище, щоб звільнити місце */
-        }
-
-        /* ГОЛОВА (АВАТАР) — ВОТ ЩО МІНЯЄМО: ПІДНІМАЄМО ВИЩЕ */
-        .hero-avatar {
-          left: 53% !important;
-          bottom: 35% !important;
-          /* Збільшив з 15% до 35%, щоб голова злетіла ВИЩЕ */
-          width: 80vw !important;
-          /* Ширина залиш, вона збс */
-          opacity: 0.8 !important;
-          /* Трохи прозоріше, щоб текст було видно краще, якщо накладеться */
-        }
-
-        /* Контенту: текст і кнопка внизу */
-        .hero-content-inner {
-          flex-direction: column;
-          /* Стовпчик залиш */
-          align-items: center;
-          /* Центр залиш */
-          gap: 1.8rem;
-          /* Відступ трохи менше */
-          bottom: 10vh !important;
-          /* Нижче до краю залиш, щоб вони не заважали */
-        }
-
-        /* Текст: робимо компактним */
-        .hero-subtitle {
-          text-align: center;
-          /* Центр */
-          font-size: 1.1rem !important;
-          /* Розмір залиш */
-          max-width: 90% !important;
-          /* Щоб не розлазився */
-          /* Фон і блур для читабельності */
-          background: rgba(8, 8, 8, 0.4);
-          padding: 10px;
-          border-radius: 8px;
-          backdrop-filter: blur(4px);
-        }
-
-        .marquee-item {
-          width: 85vw; /* Майже на весь екран телефону */
-        }
-
-        .marquee-item:hover {
-          transform: none !important;
-        }
-        .marquee-container {
-          gap: 15px;
-        }
-
-        /* Кнопка: робимо акуратнішою */
-        .btn-contact {
-          padding: 1.1rem 2.5rem !important;
-          font-size: 0.85rem !important;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
-    <nav>
-      <a href="#about">About</a>
-      <a href="#customers">Customers</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contacts</a>
-    </nav>
-
-    <section id="hero">
-      <h1 class="hero-title" id="heroTitle">HI, I'M PAVLO</h1>
-
-      <div class="hero-content-inner">
-        <p class="hero-subtitle">
-          A motion designer<br />
-          passionate about crafting<br />
-          bold and memorable<br />
-          projects 🤙
-        </p>
-
-        <div class="hero-cta">
-          <a href="#contact" class="btn-contact">Contact me</a>
+  <section id="customers">
+    <div class="marquee-container">
+      <div class="marquee-row" id="rowTop">
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/3.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/4.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/3.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/4.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
-      <div class="hero-avatar" id="avatar">
-        <img src="public/images/avatar.png" alt="Pavlo" />
-      </div>
-    </section>
-
-    <section id="customers">
-      <div class="marquee-container">
-        <div class="marquee-row" id="rowTop">
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/1.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/2.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/3.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/4.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/1.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/2.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/3.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/4.mp4" type="video/mp4" />
-            </video>
-          </div>
+      <div class="marquee-row" id="rowBottom">
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/5.mp4" type="video/mp4" />
+          </video>
         </div>
-
-        <div class="marquee-row" id="rowBottom">
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/5.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/6.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/7.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/8.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/5.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/6.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/7.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="marquee-item">
-            <video autoplay loop muted playsinline>
-              <source src="public/videos/8.mp4" type="video/mp4" />
-            </video>
-          </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/6.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/7.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/8.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/5.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/6.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/7.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="marquee-item">
+          <video autoplay loop muted playsinline>
+            <source src="public/videos/8.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
-    </section>
+    </div>
 
-    <script>
-      function fitTitle() {
-        const title = document.getElementById("heroTitle");
-        const avail = window.innerWidth * 0.95;
+  </section>
 
-        // Крок 1: Скидаємо стилі для точного заміру
-        title.style.display = "inline-block";
-        title.style.fontSize = "100px";
+  <section id="about">
+    <div class="about-obj o1" id="obj1"></div>
+    <div class="about-obj o2" id="obj2"></div>
+    <div class="about-obj o3" id="obj3"></div>
+    <div class="about-obj o4" id="obj4"></div>
 
-        // Крок 2: Міряємо ширину самих літер
-        const textWidth = title.getBoundingClientRect().width;
+    <div class="about-content">
+      <div class="about-title-wrapper">
+        <svg viewBox="0 0 1500 400" class="about-title-svg">
+          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">ABOUT ME</text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="aboutTitleFill">ABOUT ME</text>
+        </svg>
+      </div>
 
-        // Крок 3: Розрахунок і застосування
-        const newSize = (avail / textWidth) * 100;
-        title.style.fontSize = newSize + "px";
+      <div class="about-description">
+        <p><span id="line0">Bringing static ideas to life through rhythm and motion.</span></p>
+        <p><span id="line1">Focused on branding, digital storytelling, and seamless UX.</span></p>
+        <p><span id="line2">Let's move the digital world together.</span></p>
+      </div>
+    </div>
+  </section>
 
-        // Крок 4: Повертаємо центрування
-        title.style.display = "flex";
-      }
+  <section id="services">
+    <div class="services-frame">
+      <div class="services-title-wrapper">
+        <svg viewBox="0 0 1500 400" class="services-svg">
+          <text x="50%" y="70%" text-anchor="middle" class="serv-outline">SERVICES</text>
+          <text x="50%" y="70%" text-anchor="middle" class="serv-fill" id="servFill">SERVICES</text>
+        </svg>
+      </div>
 
-      // Виклик при старті та ресайзі
-      window.addEventListener("resize", fitTitle);
-      window.addEventListener("load", fitTitle);
-      fitTitle();
+      <div class="services-list">
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">01</span>
+            </div>
+            <div class="service-text">
+              <h3>2D Animation & Kinetic Typography</h3>
+              <p>Creating dynamic motion graphics and high-impact visual stories.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
 
-      // Рух відео
-      const rowTop = document.getElementById("rowTop");
-      const rowBottom = document.getElementById("rowBottom");
-      let scrollTimeout;
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">02</span>
+            </div>
+            <div class="service-text">
+              <h3>3D Visualization & Product Demos</h3>
+              <p>High-end product rendering and functional 3D demonstrations.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
 
-      window.addEventListener("scroll", () => {
-        const scrollPos = window.pageYOffset;
-        const isMobile = window.innerWidth <= 768;
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">03</span>
+            </div>
+            <div class="service-text">
+              <h3>Logo Animation & Brand Identity</h3>
+              <p>Bringing brands to life through unique motion signatures.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
 
-        // ШВИДКІСТЬ: на десктопі 0.8/0.5, на мобілці 0.25/0.15 (повільніше)
-        const speedTop = isMobile ? 0.25 : 0.8;
-        const speedBottom = isMobile ? 0.15 : 0.5;
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">04</span>
+            </div>
+            <div class="service-text">
+              <h3>VFX & Post-Production</h3>
+              <p>Visual effects and seamless integration for cinematic content.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
 
-        const moveTop = scrollPos * speedTop;
-        const moveBottom = scrollPos * speedBottom;
+        <div class="service-item">
+          <div class="service-content">
+            <div class="num-mask">
+              <span class="service-num">05</span>
+            </div>
+            <div class="service-text">
+              <h3>UI/UX Motion Design</h3>
+              <p>Interactive prototypes and interface animations that feel natural.</p>
+            </div>
+          </div>
+          <div class="service-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        if (rowTop) rowTop.style.transform = `translateX(-${moveTop}px)`;
-        if (rowBottom)
-          rowBottom.style.transform = `translateX(calc(-30% + ${moveBottom}px))`;
+  <script>
+    function fitTitle() {
+      const title = document.getElementById("heroTitle");
+      const avail = window.innerWidth * 0.95;
 
-        // БЛЮР: Тільки для десктопів
-        if (!isMobile) {
-          rowTop.style.filter = "blur(2px)";
-          rowBottom.style.filter = "blur(2px)";
+      // Крок 1: Скидаємо стилі для точного заміру
+      title.style.display = "inline-block";
+      title.style.fontSize = "100px";
 
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            rowTop.style.filter = "blur(0)";
-            rowBottom.style.filter = "blur(0)";
-          }, 150);
-        } else {
-          // На мобільних блюр завжди 0
-          rowTop.style.filter = "none";
-          rowBottom.style.filter = "none";
-        }
-      });
+      // Крок 2: Міряємо ширину самих літер
+      const textWidth = title.getBoundingClientRect().width;
 
-      // ── Cursor ───────────────────────────────────────
-      const cursor = document.getElementById("cursor");
-      const ring = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
+      // Крок 3: Розрахунок і застосування
+      const newSize = (avail / textWidth) * 100;
+      title.style.fontSize = newSize + "px";
 
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.left = mx + "px";
-        cursor.style.top = my + "px";
-      });
-      (function loopRing() {
-        rx += (mx - rx) * 0.13;
-        ry += (my - ry) * 0.13;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(loopRing);
-      })();
+      // Крок 4: Повертаємо центрування
+      title.style.display = "flex";
+    }
 
-      document.querySelectorAll("a").forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursor.style.transform = "translate(-50%,-50%) scale(3)";
-          ring.style.width = "54px";
-          ring.style.height = "54px";
-          ring.style.opacity = "0.4";
-        });
-        el.addEventListener("mouseleave", () => {
-          cursor.style.transform = "translate(-50%,-50%) scale(1)";
-          ring.style.width = "32px";
-          ring.style.height = "32px";
-          ring.style.opacity = "1";
-        });
-      });
+    // Виклик при старті та ресайзі
+    window.addEventListener("resize", fitTitle);
+    window.addEventListener("load", fitTitle);
+    fitTitle();
 
-      // ── Avatar parallax ──────────────────────────────
-      const avatar = document.getElementById("avatar");
-      let ax = 0,
-        ay = 0,
-        tx = 0,
-        ty = 0;
-      const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    // Рух відео
+    const rowTop = document.getElementById("rowTop");
+    const rowBottom = document.getElementById("rowBottom");
+    let scrollTimeout;
 
+    window.addEventListener("scroll", () => {
+      const scrollPos = window.pageYOffset;
+      const isMobile = window.innerWidth <= 768;
+
+      // ШВИДКІСТЬ: на десктопі 0.8/0.5, на мобілці 0.25/0.15 (повільніше)
+      const speedTop = isMobile ? 0.25 : 0.8;
+      const speedBottom = isMobile ? 0.15 : 0.5;
+
+      const moveTop = scrollPos * speedTop;
+      const moveBottom = scrollPos * speedBottom;
+
+      if (rowTop) rowTop.style.transform = `translateX(-${moveTop}px)`;
+      if (rowBottom)
+        rowBottom.style.transform = `translateX(calc(-30% + ${moveBottom}px))`;
+
+      // БЛЮР: Тільки для десктопів
       if (!isMobile) {
-        document.addEventListener("mousemove", (e) => {
-          const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-          const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-          // Збільшив амплітуду, щоб було видно рух
-          tx = nx * 50;
-          ty = ny * 25;
-        });
-        (function loopAvatar() {
-          ax += (tx - ax) * 0.08;
-          ay += (ty - ay) * 0.08;
+        rowTop.style.filter = "blur(2px)";
+        rowBottom.style.filter = "blur(2px)";
 
-          // Обов'язково додаємо translateX(-50%), бо картинка центрована через цей хак
-          // rotateY додає "об'єму" при русі
-          avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${ax * 0.2}deg)`;
-
-          requestAnimationFrame(loopAvatar);
-        })();
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          rowTop.style.filter = "blur(0)";
+          rowBottom.style.filter = "blur(0)";
+        }, 150);
+      } else {
+        // На мобільних блюр завжди 0
+        rowTop.style.filter = "none";
+        rowBottom.style.filter = "none";
       }
-    </script>
-  </body>
+    });
+
+    // ── Cursor ───────────────────────────────────────
+    const cursor = document.getElementById("cursor");
+    const ring = document.getElementById("cursorRing");
+    let mx = 0,
+      my = 0,
+      rx = 0,
+      ry = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + "px";
+      cursor.style.top = my + "px";
+    });
+    (function loopRing() {
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      ring.style.left = rx + "px";
+      ring.style.top = ry + "px";
+      requestAnimationFrame(loopRing);
+    })();
+
+    document.querySelectorAll("a").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        cursor.style.transform = "translate(-50%,-50%) scale(3)";
+        ring.style.width = "54px";
+        ring.style.height = "54px";
+        ring.style.opacity = "0.4";
+      });
+      el.addEventListener("mouseleave", () => {
+        cursor.style.transform = "translate(-50%,-50%) scale(1)";
+        ring.style.width = "32px";
+        ring.style.height = "32px";
+        ring.style.opacity = "1";
+      });
+    });
+
+    // ── Avatar parallax ──────────────────────────────
+    const avatar = document.getElementById("avatar");
+    let ax = 0,
+      ay = 0,
+      tx = 0,
+      ty = 0;
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
+    if (!isMobile) {
+      document.addEventListener("mousemove", (e) => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        // Збільшив амплітуду, щоб було видно рух
+        tx = nx * 50;
+        ty = ny * 25;
+      });
+      (function loopAvatar() {
+        ax += (tx - ax) * 0.08;
+        ay += (ty - ay) * 0.08;
+
+        // Обов'язково додаємо translateX(-50%), бо картинка центрована через цей хак
+        // rotateY додає "об'єму" при русі
+        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${ax * 0.2}deg)`;
+
+        requestAnimationFrame(loopAvatar);
+      })();
+    }
+
+    // --- ABOUT SECTION SCROLL LOGIC ---
+    (function () {
+      const section = document.getElementById("about");
+      const fill = document.getElementById("aboutTitleFill");
+      const lines = [
+        document.getElementById("line0"),
+        document.getElementById("line1"),
+        document.getElementById("line2"),
+      ];
+
+      const objs = [
+        // Дуже швидкий (вилетить першим)
+        {
+          el: document.getElementById("obj1"),
+          speed: 1,
+          fromY: -180,
+          fromX: -160,
+          rot: -15,
+        },
+
+        // Середній
+        {
+          el: document.getElementById("obj2"),
+          speed: 0.8,
+          fromY: -220,
+          fromX: 180,
+          rot: 20,
+        },
+
+        // Повільний (буде плавно "доповзати")
+        {
+          el: document.getElementById("obj3"),
+          speed: 0.5,
+          fromY: -160,
+          fromX: 140,
+          rot: -10,
+        },
+
+        // Дуже повільний (почне рух останнім)
+        {
+          el: document.getElementById("obj4"),
+          speed: 0.3,
+          fromY: -200,
+          fromX: -130,
+          rot: 12,
+        },
+      ];
+
+      function clamp(v, lo, hi) {
+        return Math.min(Math.max(v, lo), hi);
+      }
+      function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function onScroll() {
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight;
+
+        // p = 0 коли верх секції тільки з'явився знизу екрану (rect.top === winH)
+        // p = 1 коли верх секції дійшов до середини екрану (rect.top === winH * 0.5)
+        const offset = winH * 0.7; // 30% екрана треба проскролити в "пусту", щоб почалось
+        const p = clamp((winH - rect.top - offset) / (winH * 0.4), 0, 1);
+
+        // 1. Title — одразу швидко
+        fill.style.opacity = easeOut(clamp((p - 0.3) * 1.5, 0, 1));
+
+        // 2. Рядки — зліва направо під кутом, clip-path на span
+        lines.forEach((line, i) => {
+          const lp = clamp((p - 0.2 - i * 0.15) / 0.5, 0, 1);
+          const lep = easeOut(lp);
+          // виїжджає знизу-зліва під кутом
+          line.style.transform = `translateX(${(1 - lep) * -80}px) translateY(${(1 - lep) * 60}px) skewX(${(1 - lep) * -15}deg)`;
+          line.style.opacity = lep;
+        });
+
+        // 3. Об'єкти
+        objs.forEach(({ el, speed, fromY, fromX, rot }) => {
+          const ep = easeOut(clamp(p * speed * 1.5, 0, 1));
+          el.style.transform = `translate(${fromX * (1 - ep)}px, ${fromY * (1 - ep)}px) rotate(${rot * (1 - ep)}deg)`;
+          el.style.opacity = ep;
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.getElementById('services');
+      const fill = document.getElementById('servFill');
+      const items = document.querySelectorAll('.service-item');
+
+      function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+      // 1. ПЛАВНА ЗАЛИВКА ТАЙТЛА "SERVICES"
+      window.addEventListener('scroll', () => {
+        if (!section || !fill) return;
+
+        const winH = window.innerHeight;
+        const secRect = section.getBoundingClientRect();
+
+        // Розрахунок: починає заливатись, коли верх секції піднявся на 40% екрана
+        // p стає 1, коли проскролили ще 50% висоти вікна
+        let p = clamp((winH - secRect.top - (winH * 0.4)) / (winH * 0.5), 0, 1);
+
+        fill.style.opacity = p;
+      }, { passive: true });
+
+      // 2. ПОЯВА ПУНКТІВ ТА ЦИФР (Intersection Observer)
+      const observerOptions = {
+        threshold: 0.15, // Спрацює, коли 15% пункту з'явиться в кадрі
+        rootMargin: "0px 0px -50px 0px" // Трішки раніше за фактичний край
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const item = entry.target;
+          const line = item.querySelector('.service-line');
+          const num = item.querySelector('.service-num');
+
+          if (entry.isIntersecting) {
+            // Додаємо клас active для CSS (якщо захочеш щось докрутити там)
+            item.classList.add('active');
+
+            // Анімуємо сам контейнер
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0) skewY(0deg)";
+
+            // Виганяємо цифру з маски
+            if (num) num.style.transform = "translateY(0)";
+
+            // Малюємо лінію
+            if (line) line.style.transform = "scaleX(1)";
+
+            // Якщо хочеш, щоб анімація спрацювала лише ОДИН РАЗ — розкоментуй рядок нижче:
+            // observer.unobserve(item);
+          } else {
+            // Якщо хочеш, щоб вони зникали назад, коли юзер скролить вгору
+            item.classList.remove('active');
+            item.style.opacity = "0";
+            item.style.transform = "translateY(100px) skewY(2deg)";
+            if (num) num.style.transform = "translateY(100%)";
+            if (line) line.style.transform = "scaleX(0)";
+          }
+        });
+      }, observerOptions);
+
+      items.forEach((item) => {
+        if (item) observer.observe(item);
+      });
+    });
+  </script>
+</body>
+
 </html>
