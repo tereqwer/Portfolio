@@ -15,18 +15,6 @@
       position: relative;
     }
 
-    /* Окремо для html та body прибираємо фіксовану висоту */
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      /* Тепер body може рости вниз */
-      background: var(--bg);
-      overflow-x: hidden;
-      overflow-y: auto;
-      cursor: none;
-    }
-
     *,
     *::before,
     *::after {
@@ -46,19 +34,22 @@
       --nav-h: 64px;
     }
 
-    html,
-    body {
+    html {
       width: 100%;
       min-height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: "DM Sans", sans-serif;
-      overflow-x: hidden;
-      /* Ховаємо горизонтальний скрол стрічок */
-      overflow-y: auto;
-      /* Вмикаємо вертикальний скрол сайту */
-      cursor: none;
       scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      cursor: none;
+      overflow-x: clip;
+      /* Тільки X і тільки на body */
     }
 
     body::after {
@@ -594,14 +585,11 @@
     /* Projects */
     #projects {
       background: #fff;
-      /* Фон під секцією, щоб було видно закруглення зверху */
       position: relative;
     }
 
     .projects-container {
       background: #080808;
-      /* Зерниста текстура */
-
       border-radius: 60px 60px 0 0;
       width: 100%;
       min-height: 250vh;
@@ -609,7 +597,6 @@
       position: relative;
     }
 
-    /* ЗАГОЛОВОК PROJECTS */
     .projects-title-wrapper {
       width: 100%;
       margin-bottom: 80px;
@@ -641,39 +628,36 @@
       opacity: 0;
     }
 
-    /* STACKING CARDS */
     .projects-stack {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0;
-      /* Картки будуть липнути */
     }
 
     .project-card {
       position: sticky;
-      top: 10vh;
-      /* Де карта зупиняється при скролі */
-      width: 90%;
-      max-width: 1300px;
-      height: 80vh;
+      top: calc(5vh + (var(--i) * 3vh));
+      top: 50px;
+      width: 98%;
+      max-width: 1800px;
+      height: 90vh;
       background: #111;
-      margin-bottom: 20vh;
-      /* Простір, щоб наступна карта наїхала */
+      margin-bottom: 50vh;
       border-radius: 60px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 50px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.5);
+      gap: 20px;
+      box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.8);
     }
 
-    /* HEADER КАРТКИ */
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 10%;
     }
 
     .client-box {
@@ -705,14 +689,11 @@
       letter-spacing: 2px;
     }
 
-    /* ГЕОМЕТРІЯ: ВІДЕО + 2 ФОТО */
     .card-main {
       display: grid;
       grid-template-columns: 2.5fr 1fr;
-      /* Відео ширше */
       gap: 30px;
-      height: 65%;
-      /* 80% площі за ієрархією */
+      height: 80%;
     }
 
     .main-video video {
@@ -728,6 +709,10 @@
       gap: 30px;
     }
 
+    .img-box {
+      height: 100%;
+    }
+
     .img-box img {
       width: 100%;
       height: 100%;
@@ -739,60 +724,9 @@
       flex: 1.4;
     }
 
-    /* Вище */
     .img-box.bottom {
       flex: 1;
     }
-
-    /* Нижче */
-
-    /* КНОПКА */
-    .btn-case {
-      align-self: flex-end;
-      padding: 18px 50px;
-      border: 1px solid #fff;
-      border-radius: 100px;
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Bebas Neue';
-      font-size: 1.2rem;
-      letter-spacing: 3px;
-      transition: 0.4s;
-    }
-
-    .btn-case:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    /* АДАПТАЦІЯ ДЛЯ МОБІЛКИ */
-    @media (max-width: 768px) {
-      .project-card {
-        height: auto;
-        padding: 30px 20px;
-        border-radius: 40px;
-      }
-
-      .card-main {
-        grid-template-columns: 1fr;
-        /* Стекаємо в колонку */
-        height: auto;
-      }
-
-      .side-images {
-        display: none;
-      }
-
-      /* Ховаємо доп фото на малих екранах для чистоти */
-      .c-name {
-        font-size: 2.5rem;
-      }
-
-      .projects-title-svg text {
-        font-size: 350px !important;
-      }
-    }
-
 
     /* ── Keyframes ── */
     @keyframes fadeDown {
@@ -861,30 +795,59 @@
     }
 
     @media (max-width: 768px) {
+
+      /* Projects */
       .project-card {
-        padding: 20px;
+        top: calc(10vh + (var(--i) * 2vh));
+        width: 95%;
         height: auto;
-        min-height: 80vh;
-        border-radius: 30px;
+        padding: 30px 20px;
+        border-radius: 40px;
+        margin-bottom: 25vh;
+        gap: 30px;
       }
 
-      .card-content {
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        height: auto;
+      }
+
+      .client-box {
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .c-num {
+        font-size: 2rem;
+      }
+
+      .c-name {
+        font-size: 3rem;
+      }
+
+      .live-circle {
+        align-self: flex-start;
+        padding: 8px 20px;
+        font-size: 0.7rem;
+      }
+
+      .card-main {
         grid-template-columns: 1fr;
-        /* Стек на мобілці */
+        height: auto;
+        gap: 20px;
       }
 
-      .images-side {
-        flex-direction: row;
-        /* На мобілці краще в ряд */
-        height: 150px;
+      .main-video video {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        border-radius: 20px;
       }
 
-      .client-name {
-        font-size: 1.8rem;
-      }
-
-      .projects-svg text {
-        font-size: 300px !important;
+      .side-images {
+        display: none;
       }
 
       #services {
@@ -1301,7 +1264,7 @@
 
       <div class="projects-stack">
 
-        <div class="project-card">
+        <div class="project-card" style="--i: 1;">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">01</span>
@@ -1319,13 +1282,9 @@
               <div class="img-box bottom"><img src="public/images/4.png"></div>
             </div>
           </div>
-
-          <div class="card-footer">
-            <a href="#" class="btn-case">VIEW PROJECT</a>
-          </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" style="--i: 2;">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">02</span>
@@ -1343,13 +1302,9 @@
               <div class="img-box bottom"><img src="public/images/8.png"></div>
             </div>
           </div>
-
-          <div class="card-footer">
-            <a href="#" class="btn-case">VIEW PROJECT</a>
-          </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" style="--i: 3;">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">03</span>
@@ -1366,10 +1321,6 @@
               <div class="img-box top"><img src="public/images/5.png"></div>
               <div class="img-box bottom"><img src="public/images/5.png"></div>
             </div>
-          </div>
-
-          <div class="card-footer">
-            <a href="#" class="btn-case">VIEW PROJECT</a>
           </div>
         </div>
 
