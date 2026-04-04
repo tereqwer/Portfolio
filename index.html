@@ -628,29 +628,46 @@
       opacity: 0;
     }
 
+    .project-card:last-child {
+      margin-bottom: 120vh;
+    }
+
     .projects-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
+      display: block;
+      /* СТРОГО block, ніякого flex */
+      width: 100%;
+      /* 100vh пустого місця вкінці — це "траса", поки 3-тя картка стоїть на місці */
+      padding-bottom: 100vh;
+      height: calc(3 * 80vh + 100vh);
+      /* 3 картки + фінальна пауза */
+      padding-bottom: 0;
+
     }
 
     .project-card {
       position: sticky;
-      top: calc(5vh + (var(--i) * 3vh));
-      top: 50px;
+      top: calc(5vh + (var(--i) * 12vh));
+      /* Кожна наступна на 3vh нижче */
       width: 98%;
-      max-width: 1800px;
-      height: 90vh;
+      max-width: 1700px;
+      height: 85vh;
+      /* 85vh, щоб знизу лишався простір і було видно, що вона об'ємна */
       background: #111;
-      margin-bottom: 50vh;
+
+      /* Відстань прокрутки між 1 і 2, та 2 і 3 картками */
+      margin: 0 auto 0 auto;
+
       border-radius: 60px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 50px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.9);
+      /* Жорсткіша тінь для розділення */
+    }
+
+    .project-card:last-child {
+      margin-bottom: 0;
     }
 
     .card-header {
@@ -668,9 +685,11 @@
 
     .c-num {
       font-family: 'Bebas Neue';
-      font-size: 2rem;
-      opacity: 0.5;
+      font-size: 8rem;
+      /* Збільшено розмір */
+      opacity: 0.9;
       color: #fff;
+      line-height: 0.8;
     }
 
     .c-name {
@@ -726,6 +745,24 @@
 
     .img-box.bottom {
       flex: 1;
+    }
+
+    #contact {
+      position: relative;
+      z-index: 100;
+      /* Перекриває чорні картки */
+      background: #edeae0;
+      color: #080808;
+      width: 100%;
+      height: 100vh;
+      border-radius: 60px 60px 0 0;
+      box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* НАЙГОЛОВНІШЕ: натягуємо секцію вгору рівно на ті ж 100vh пустої траси */
+      margin-top: -100vh;
     }
 
     /* ── Keyframes ── */
@@ -797,57 +834,66 @@
     @media (max-width: 768px) {
 
       /* Projects */
+      .projects-container {
+        padding: 50px 0;
+        border-radius: 30px 30px 0 0;
+      }
+
+      .projects-title-wrapper {
+        margin-bottom: 40px;
+      }
+
+      .projects-title-svg text {
+        font-size: 150px;
+      }
+
       .project-card {
-        top: calc(10vh + (var(--i) * 2vh));
-        width: 95%;
+        padding: 25px;
+        top: calc(5vh + (var(--i) * 4vh));
         height: auto;
-        padding: 30px 20px;
-        border-radius: 40px;
-        margin-bottom: 25vh;
-        gap: 30px;
+        min-height: 80vh;
+        border-radius: 30px;
+        gap: 15px;
       }
 
       .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
         height: auto;
       }
 
-      .client-box {
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
       .c-num {
-        font-size: 2rem;
+        font-size: 4rem;
       }
 
       .c-name {
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
 
       .live-circle {
-        align-self: flex-start;
-        padding: 8px 20px;
+        padding: 8px 15px;
         font-size: 0.7rem;
       }
 
       .card-main {
         grid-template-columns: 1fr;
         height: auto;
-        gap: 20px;
+        gap: 15px;
       }
 
       .main-video video {
-        aspect-ratio: 16 / 9;
-        height: auto;
+        height: 40vh;
         border-radius: 20px;
       }
 
       .side-images {
-        display: none;
+        flex-direction: row;
+        height: 20vh;
+        gap: 15px;
+      }
+
+      .img-box img {
+        border-radius: 20px;
       }
 
       #services {
@@ -1325,6 +1371,12 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <section id="contact" class="light-mask">
+    <div class="contact-inner">
+      <h2>LET'S TALK</h2>
     </div>
   </section>
 
