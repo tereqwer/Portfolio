@@ -750,19 +750,149 @@
     #contact {
       position: relative;
       z-index: 100;
-      /* Перекриває чорні картки */
       background: #edeae0;
       color: #080808;
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       border-radius: 60px 60px 0 0;
       box-shadow: 0 -50px 100px rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
-
-      /* НАЙГОЛОВНІШЕ: натягуємо секцію вгору рівно на ті ж 100vh пустої траси */
       margin-top: -100vh;
+      overflow: hidden;
+    }
+
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 80%;
+      max-width: 1400px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-left h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 9vw, 9rem);
+      line-height: 0.9;
+      margin: 0 0 30px 0;
+      text-transform: uppercase;
+    }
+
+    .contact-link {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+      font-weight: 500;
+      color: #080808;
+      text-decoration: underline;
+      margin-bottom: 15px;
+    }
+
+    .contact-right {
+      width: 45%;
+      margin-top: 20px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .form-row input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(8, 8, 8, 0.3);
+      padding: 10px 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      color: #080808;
+      outline: none;
+    }
+
+    .form-row input::placeholder {
+      color: rgba(8, 8, 8, 0.5);
+    }
+
+    .form-row.split {
+      display: flex;
+      gap: 30px;
+    }
+
+    .btn-submit {
+      padding: 15px 40px;
+      border: 1px solid #080808;
+      border-radius: 100px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #080808;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      margin-top: 20px;
+      align-self: flex-start;
+      /* Щоб кнопка не розтягувалась на всю ширину */
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      background: #080808;
+      color: #edeae0;
+    }
+
+    /* ЗАГЛУШКИ ДЛЯ 3D */
+    .contact-3d-placeholder {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: rgba(0, 0, 0, 0.05);
+      /* Напівпрозорий сірий круг для розуміння розміщення */
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .contact-3d-placeholder.left {
+      left: -50px;
+      bottom: 10%;
+    }
+
+    .contact-3d-placeholder.right {
+      right: 5%;
+      top: 10%;
+    }
+
+    /* МОБІЛКА */
+    @media (max-width: 768px) {
+      #contact {
+        border-radius: 30px 30px 0 0;
+      }
+
+      .contact-inner {
+        flex-direction: column;
+        width: 90%;
+        gap: 50px;
+        padding: 50px 0;
+      }
+
+      .contact-right {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      .form-row.split {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .contact-3d-placeholder {
+        display: none;
+      }
     }
 
     /* ── Keyframes ── */
@@ -1374,9 +1504,32 @@
     </div>
   </section>
 
-  <section id="contact" class="light-mask">
+  <section id="contact">
+    <div class="contact-3d-placeholder left"></div>
+    <div class="contact-3d-placeholder right"></div>
+
     <div class="contact-inner">
-      <h2>LET'S TALK</h2>
+      <div class="contact-left">
+        <h2>LET'S<br>GET IN<br>TOUCH</h2>
+        <a href="mailto:pavlotereshchuk@gmail.com" class="contact-link">pavlotereshchuk@gmail.com</a>
+        <a href="https://t.me/bowbowbowq" class="contact-link">@bowbowbowq</a>
+      </div>
+
+      <div class="contact-right">
+        <form class="contact-form">
+          <div class="form-row">
+            <input type="text" placeholder="Full Name*" required>
+          </div>
+          <div class="form-row split">
+            <input type="email" placeholder="Email*" required>
+            <input type="tel" placeholder="Phone">
+          </div>
+          <div class="form-row">
+            <input type="text" placeholder="Message">
+          </div>
+          <button type="button" class="btn-submit">SEND</button>
+        </form>
+      </div>
     </div>
   </section>
 
