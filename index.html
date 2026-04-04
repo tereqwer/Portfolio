@@ -65,7 +65,6 @@
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       opacity: 0.03;
       pointer-events: none;
       z-index: 999;
@@ -592,6 +591,209 @@
       transition: transform 1s ease 0.2s;
     }
 
+    /* Projects */
+    #projects {
+      background: #fff;
+      /* Фон під секцією, щоб було видно закруглення зверху */
+      position: relative;
+    }
+
+    .projects-container {
+      background: #080808;
+      /* Зерниста текстура */
+
+      border-radius: 60px 60px 0 0;
+      width: 100%;
+      min-height: 250vh;
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* ЗАГОЛОВОК PROJECTS */
+    .projects-title-wrapper {
+      width: 100%;
+      margin-bottom: 80px;
+    }
+
+    .projects-title-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .projects-title-svg text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 450px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .svg-outline {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1px;
+      vector-effect: non-scaling-stroke;
+      opacity: 0.3;
+    }
+
+    .svg-fill {
+      fill: #fff;
+      opacity: 0;
+    }
+
+    /* STACKING CARDS */
+    .projects-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      /* Картки будуть липнути */
+    }
+
+    .project-card {
+      position: sticky;
+      top: 10vh;
+      /* Де карта зупиняється при скролі */
+      width: 90%;
+      max-width: 1300px;
+      height: 80vh;
+      background: #111;
+      margin-bottom: 20vh;
+      /* Простір, щоб наступна карта наїхала */
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* HEADER КАРТКИ */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .client-box {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+
+    .c-num {
+      font-family: 'Bebas Neue';
+      font-size: 2rem;
+      opacity: 0.5;
+      color: #fff;
+    }
+
+    .c-name {
+      font-family: 'Bebas Neue';
+      font-size: 4rem;
+      color: #fff;
+    }
+
+    .live-circle {
+      border: 1px solid #fff;
+      padding: 10px 25px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ГЕОМЕТРІЯ: ВІДЕО + 2 ФОТО */
+    .card-main {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      /* Відео ширше */
+      gap: 30px;
+      height: 65%;
+      /* 80% площі за ієрархією */
+    }
+
+    .main-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 40px;
+    }
+
+    .side-images {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+    }
+
+    .img-box.top {
+      flex: 1.4;
+    }
+
+    /* Вище */
+    .img-box.bottom {
+      flex: 1;
+    }
+
+    /* Нижче */
+
+    /* КНОПКА */
+    .btn-case {
+      align-self: flex-end;
+      padding: 18px 50px;
+      border: 1px solid #fff;
+      border-radius: 100px;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Bebas Neue';
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      transition: 0.4s;
+    }
+
+    .btn-case:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* АДАПТАЦІЯ ДЛЯ МОБІЛКИ */
+    @media (max-width: 768px) {
+      .project-card {
+        height: auto;
+        padding: 30px 20px;
+        border-radius: 40px;
+      }
+
+      .card-main {
+        grid-template-columns: 1fr;
+        /* Стекаємо в колонку */
+        height: auto;
+      }
+
+      .side-images {
+        display: none;
+      }
+
+      /* Ховаємо доп фото на малих екранах для чистоти */
+      .c-name {
+        font-size: 2.5rem;
+      }
+
+      .projects-title-svg text {
+        font-size: 350px !important;
+      }
+    }
+
+
     /* ── Keyframes ── */
     @keyframes fadeDown {
       from {
@@ -659,6 +861,31 @@
     }
 
     @media (max-width: 768px) {
+      .project-card {
+        padding: 20px;
+        height: auto;
+        min-height: 80vh;
+        border-radius: 30px;
+      }
+
+      .card-content {
+        grid-template-columns: 1fr;
+        /* Стек на мобілці */
+      }
+
+      .images-side {
+        flex-direction: row;
+        /* На мобілці краще в ряд */
+        height: 150px;
+      }
+
+      .client-name {
+        font-size: 1.8rem;
+      }
+
+      .projects-svg text {
+        font-size: 300px !important;
+      }
 
       #services {
         height: auto;
@@ -1062,6 +1289,94 @@
     </div>
   </section>
 
+  <section id="projects">
+    <div class="projects-container">
+
+      <div class="projects-title-wrapper">
+        <svg viewBox="0 0 1800 600" class="projects-title-svg">
+          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">PROJECTS</text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="projectsTitleFill">PROJECTS</text>
+        </svg>
+      </div>
+
+      <div class="projects-stack">
+
+        <div class="project-card">
+          <div class="card-header">
+            <div class="client-box">
+              <span class="c-num">01</span>
+              <span class="c-name">Oshi & Gate 2 campain</span>
+            </div>
+            <div class="live-circle">LIVE PROJECT</div>
+          </div>
+
+          <div class="card-main">
+            <div class="main-video">
+              <video src="public/videos/4.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="side-images">
+              <div class="img-box top"><img src="public/images/4.png"></div>
+              <div class="img-box bottom"><img src="public/images/4.png"></div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a href="#" class="btn-case">VIEW PROJECT</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-header">
+            <div class="client-box">
+              <span class="c-num">02</span>
+              <span class="c-name">Motorola presentation</span>
+            </div>
+            <div class="live-circle">LIVE PROJECT</div>
+          </div>
+
+          <div class="card-main">
+            <div class="main-video">
+              <video src="public/videos/8.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="side-images">
+              <div class="img-box top"><img src="public/images/8.png"></div>
+              <div class="img-box bottom"><img src="public/images/8.png"></div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a href="#" class="btn-case">VIEW PROJECT</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-header">
+            <div class="client-box">
+              <span class="c-num">03</span>
+              <span class="c-name">ADIDAS / FLOW</span>
+            </div>
+            <div class="live-circle">LIVE PROJECT</div>
+          </div>
+
+          <div class="card-main">
+            <div class="main-video">
+              <video src="public/videos/5.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="side-images">
+              <div class="img-box top"><img src="public/images/5.png"></div>
+              <div class="img-box bottom"><img src="public/images/5.png"></div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a href="#" class="btn-case">VIEW PROJECT</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <script>
     function fitTitle() {
       const title = document.getElementById("heroTitle");
@@ -1341,6 +1656,20 @@
         if (item) observer.observe(item);
       });
     });
+
+    // Projects
+    window.addEventListener('scroll', () => {
+      const section = document.getElementById('projects');
+      const fill = document.getElementById('projectsTitleFill');
+      if (!section || !fill) return;
+
+      const rect = section.getBoundingClientRect();
+      const winH = window.innerHeight;
+
+      // Логіка як в About: починає чорніти при появі в зоні 40%
+      let p = (winH - rect.top - (winH * 0.3)) / (winH * 0.5);
+      fill.style.opacity = Math.min(Math.max(p, 0), 1);
+    }, { passive: true });
   </script>
 </body>
 
