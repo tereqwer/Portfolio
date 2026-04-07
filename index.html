@@ -1770,16 +1770,31 @@
         </div>
 
         <div class="contact-right">
-          <form class="contact-form" id="tgForm">
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="contact-form"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="ce2283eb-1065-4707-ad87-41a63340cc41"
+            />
+
             <div class="form-row">
-              <input type="text" id="name" placeholder="Full Name*" required />
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name*"
+                required
+              />
             </div>
             <div class="form-row split">
-              <input type="email" id="email" placeholder="Email*" required />
-              <input type="tel" id="phone" placeholder="Phone" />
+              <input type="email" name="email" placeholder="Email*" required />
+              <input type="tel" name="phone" placeholder="Phone" />
             </div>
             <div class="form-row">
-              <input type="text" id="message" placeholder="Message" />
+              <input type="text" name="message" placeholder="Message" />
             </div>
             <button type="submit" class="btn-submit">SEND</button>
           </form>
@@ -2245,38 +2260,6 @@
         );
 
         observer.observe(contactSection);
-
-        // Форма телеграм
-        document
-          .getElementById("tgForm")
-          .addEventListener("submit", function (e) {
-            e.preventDefault();
-            const TOKEN = "8512722026:AAHigZuyPdQpTz4VrIarr-EyhBQRpfwBC0Y"; // Встав свій токен
-            const CHAT_ID = "456911848"; // Встав свій ID
-            const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const phone = document.getElementById("phone").value;
-            const message = document.getElementById("message").value;
-
-            const text = `Нова заявка з сайту!\n\nІм'я: ${name}\nEmail: ${email}\nТелефон: ${phone}\nПовідомлення: ${message}`;
-
-            fetch(URI_API, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ chat_id: CHAT_ID, text: text }),
-            })
-              .then((res) => {
-                if (res.ok) {
-                  alert("Відправлено успішно!");
-                  document.getElementById("tgForm").reset();
-                } else {
-                  alert("Помилка відправки.");
-                }
-              })
-              .catch((err) => alert("Помилка відправки."));
-          });
       });
     </script>
   </body>
