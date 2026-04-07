@@ -1797,7 +1797,7 @@
     let touchStartY = 0;
     let currentOffsetTop = 0;
     let currentOffsetBottom = 0;
-    let isHorizontalSwipe = null; // null = ще не визначено напрямок
+    let isHorizontalSwipe = null;
 
     function getTranslateX(el) {
       const style = window.getComputedStyle(el);
@@ -1808,12 +1808,17 @@
     marqueeContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
-      isHorizontalSwipe = null; // скидаємо напрямок
-
-      // Читаємо реальний поточний стан
+      isHorizontalSwipe = null;
       currentOffsetTop = getTranslateX(rowTop);
       currentOffsetBottom = getTranslateX(rowBottom);
     }, { passive: true });
+
+    // Окремий listener на section — блокує скрол тільки при горизонтальному свайпі
+    document.getElementById('customers').addEventListener('touchmove', (e) => {
+      if (isHorizontalSwipe === true) {
+        e.preventDefault();
+      }
+    }, { passive: false });
 
     marqueeContainer.addEventListener('touchmove', (e) => {
       const isMobile = window.innerWidth <= 768;
@@ -1822,20 +1827,17 @@
       const deltaX = e.touches[0].clientX - touchStartX;
       const deltaY = e.touches[0].clientY - touchStartY;
 
-      // Визначаємо напрямок лише один раз на початку свайпу
       if (isHorizontalSwipe === null) {
         if (Math.abs(deltaX) > Math.abs(deltaY) + 5) {
           isHorizontalSwipe = true;
         } else if (Math.abs(deltaY) > Math.abs(deltaX) + 5) {
           isHorizontalSwipe = false;
         } else {
-          return; // ще не зрозуміло — чекаємо
+          return;
         }
       }
 
       if (!isHorizontalSwipe) return;
-
-      e.preventDefault();
 
       const rowTopWidth = rowTop.scrollWidth / 2;
       const rowBottomWidth = rowBottom.scrollWidth / 2;
@@ -1843,7 +1845,6 @@
       let newTop = currentOffsetTop + deltaX;
       let newBottom = currentOffsetBottom + deltaX * 0.6;
 
-      // Безкінечна петля
       if (newTop > 0) newTop -= rowTopWidth;
       if (newTop < -rowTopWidth) newTop += rowTopWidth;
 
@@ -1852,8 +1853,7 @@
 
       rowTop.style.transform = `translateX(${newTop}px)`;
       rowBottom.style.transform = `translateX(${newBottom}px)`;
-    }, { passive: false });
-
+    }, { passive: true }); // ← тут passive: true, preventDefault прибрано
 
 
     // ── Cursor ───────────────────────────────────────
