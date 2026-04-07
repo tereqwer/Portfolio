@@ -1350,6 +1350,12 @@
 
       .marquee-container {
         gap: 15px;
+        touch-action: pan-y;
+      }
+
+      .marquee-item:hover {
+        transform: none;
+        box-shadow: none;
       }
 
       /* Кнопка: робимо акуратнішою */
@@ -1600,7 +1606,7 @@
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">01</span>
-              <span class="c-name">Oshi & Gate 2 campain</span>
+              <span class="c-name">Oshi & Gate 2 campaing</span>
             </div>
             <div class="live-circle">LIVE PROJECT</div>
           </div>
@@ -1610,8 +1616,8 @@
               <video src="public/videos/4.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/4.png"></div>
-              <div class="img-box bottom"><img src="public/images/4.png"></div>
+              <div class="img-box top"><img src="public/images/oshi_ae.png"></div>
+              <div class="img-box bottom"><img src="public/images/oshi_ae2.png"></div>
             </div>
           </div>
         </div>
@@ -1630,8 +1636,8 @@
               <video src="public/videos/8.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/8.png"></div>
-              <div class="img-box bottom"><img src="public/images/8.png"></div>
+              <div class="img-box top"><img src="public/images/radio_ae.png"></div>
+              <div class="img-box bottom"><img src="public/images/radio_ae2.png"></div>
             </div>
           </div>
         </div>
@@ -1640,18 +1646,18 @@
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">03</span>
-              <span class="c-name">ADIDAS / FLOW</span>
+              <span class="c-name">2D Logo animation</span>
             </div>
             <div class="live-circle">LIVE PROJECT</div>
           </div>
 
           <div class="card-main">
             <div class="main-video">
-              <video src="public/videos/5.mp4" autoplay muted loop playsinline></video>
+              <video src="public/videos/3.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/5.png"></div>
-              <div class="img-box bottom"><img src="public/images/5.png"></div>
+              <div class="img-box top"><img src="public/images/logo_ae.png"></div>
+              <div class="img-box bottom"><img src="public/images/logo_ae2.png"></div>
             </div>
           </div>
         </div>
@@ -1742,6 +1748,8 @@
       title.style.display = "flex";
     }
 
+
+    // customers animation
     // Виклик при старті та ресайзі
     window.addEventListener("resize", fitTitle);
     window.addEventListener("load", fitTitle);
@@ -1783,6 +1791,44 @@
         rowBottom.style.filter = "none";
       }
     });
+
+    // Touch свайп для мобільних
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let currentOffsetTop = 0;
+    let currentOffsetBottom = 0;
+
+    const marqueeContainer = document.querySelector('.marquee-container');
+
+    marqueeContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+
+      // Зберігаємо поточний offset з transform
+      const matrixTop = new WebKitCSSMatrix(getComputedStyle(rowTop).transform);
+      const matrixBottom = new WebKitCSSMatrix(getComputedStyle(rowBottom).transform);
+      currentOffsetTop = matrixTop.m41;
+      currentOffsetBottom = matrixBottom.m41;
+    }, { passive: true });
+
+    marqueeContainer.addEventListener('touchmove', (e) => {
+      const isMobile = window.innerWidth <= 768;
+      if (!isMobile) return;
+
+      const deltaX = e.touches[0].clientX - touchStartX;
+      const deltaY = e.touches[0].clientY - touchStartY;
+
+      // Якщо свайп більше горизонтальний — керуємо відео, блокуємо сторінку
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        e.preventDefault();
+
+        const newTop = currentOffsetTop + deltaX;
+        const newBottom = currentOffsetBottom + deltaX * 0.6;
+
+        rowTop.style.transform = `translateX(${newTop}px)`;
+        rowBottom.style.transform = `translateX(${newBottom}px)`;
+      }
+    }, { passive: false });
 
     // ── Cursor ───────────────────────────────────────
     const cursor = document.getElementById("cursor");
