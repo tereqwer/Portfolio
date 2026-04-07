@@ -1750,51 +1750,40 @@
 
 
     // customers animation
-    // Виклик при старті та ресайзі
     window.addEventListener("resize", fitTitle);
     window.addEventListener("load", fitTitle);
     fitTitle();
 
-    // Рух відео
     const rowTop = document.getElementById("rowTop");
     const rowBottom = document.getElementById("rowBottom");
     const marqueeContainer = document.querySelector(".marquee-container");
     let scrollTimeout;
 
-    // Touch стан
+    // Свайп стан
     let touchStartX = 0;
     let touchStartY = 0;
-    let currentOffsetTop = 0;
-    let currentOffsetBottom = 0;
     let isHorizontalSwipe = null;
-    let swipeOffsetTop = 0;    // ← окремо зберігаємо свайп-зсув
+    let swipeOffsetTop = 0;
     let swipeOffsetBottom = 0;
-
-    function getTranslateX(el) {
-      const matrix = new DOMMatrix(window.getComputedStyle(el).transform);
-      return matrix.m41;
-    }
+    let swipeStartTop = 0;
+    let swipeStartBottom = 0;
 
     window.addEventListener("scroll", () => {
       const scrollPos = window.pageYOffset;
       const isMobile = window.innerWidth <= 768;
 
-      const speedTop = isMobile ? 0.25 : 0.8;
-      const speedBottom = isMobile ? 0.15 : 0.5;
-
-      const moveTop = scrollPos * speedTop;
-      const moveBottom = scrollPos * speedBottom;
-
       if (isMobile) {
-        // На мобільних — додаємо свайп-зсув поверх скрол-зсуву
-        if (rowTop) rowTop.style.transform = `translateX(${-moveTop + swipeOffsetTop}px)`;
-        if (rowBottom) rowBottom.style.transform = `translateX(${-moveBottom * 0.6 + swipeOffsetBottom - rowBottom.scrollWidth * 0.15}px)`;
+        const moveTop = scrollPos * 0.25;
+        const moveBottom = scrollPos * 0.15;
+        rowTop.style.transform = `translateX(${-moveTop + swipeOffsetTop}px)`;
+        rowBottom.style.transform = `translateX(${moveBottom + swipeOffsetBottom}px)`;
         rowTop.style.filter = "none";
         rowBottom.style.filter = "none";
       } else {
-        if (rowTop) rowTop.style.transform = `translateX(-${moveTop}px)`;
-        if (rowBottom) rowBottom.style.transform = `translateX(calc(-30% + ${moveBottom}px))`;
-
+        const moveTop = scrollPos * 0.8;
+        const moveBottom = scrollPos * 0.5;
+        rowTop.style.transform = `translateX(-${moveTop}px)`;
+        rowBottom.style.transform = `translateX(calc(-30% + ${moveBottom}px))`;
         rowTop.style.filter = "blur(2px)";
         rowBottom.style.filter = "blur(2px)";
         clearTimeout(scrollTimeout);
@@ -1805,19 +1794,17 @@
       }
     });
 
-    // Блокуємо вертикальний скрол тільки при горизонтальному свайпі
     document.getElementById('customers').addEventListener('touchmove', (e) => {
-      if (isHorizontalSwipe === true) {
-        e.preventDefault();
-      }
+      if (isHorizontalSwipe === true) e.preventDefault();
     }, { passive: false });
 
     marqueeContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
       isHorizontalSwipe = null;
-      currentOffsetTop = swipeOffsetTop;
-      currentOffsetBottom = swipeOffsetBottom;
+      // Запам'ятовуємо поточний свайп-зсув як старт
+      swipeStartTop = swipeOffsetTop;
+      swipeStartBottom = swipeOffsetBottom;
     }, { passive: true });
 
     marqueeContainer.addEventListener('touchmove', (e) => {
@@ -1838,28 +1825,29 @@
 
       if (!isHorizontalSwipe) return;
 
-      const rowTopWidth = rowTop.scrollWidth / 2;
-      const rowBottomWidth = rowBottom.scrollWidth / 2;
+      // Половина scrollWidth бо відео дублюються
+      const loopTop = rowTop.scrollWidth / 2;
+      const loopBottom = rowBottom.scrollWidth / 2;
 
-      let newTop = currentOffsetTop + deltaX;
-      let newBottom = currentOffsetBottom + deltaX * 0.6;
+      let newTop = swipeStartTop + deltaX;
+      let newBottom = swipeStartBottom + deltaX * 0.6;
 
-      // Безкінечна петля
-      if (newTop > rowTopWidth) newTop -= rowTopWidth;
-      if (newTop < -rowTopWidth) newTop += rowTopWidth;
-      if (newBottom > rowBottomWidth) newBottom -= rowBottomWidth;
-      if (newBottom < -rowBottomWidth) newBottom += rowBottomWidth;
+      // Безкінечна петля — нормалізуємо в діапазон [-loopTop, 0]
+      newTop = ((newTop % loopTop) + loopTop) % loopTop;
+      if (newTop > 0) newTop -= loopTop;
+
+      newBottom = ((newBottom % loopBottom) + loopBottom) % loopBottom;
+      if (newBottom > 0) newBottom -= loopBottom;
 
       swipeOffsetTop = newTop;
       swipeOffsetBottom = newBottom;
 
-      // Тригеримо scroll handler щоб він перерахував з новим свайп-зсувом
       const scrollPos = window.pageYOffset;
-      const speedTop = 0.25;
-      const speedBottom = 0.15;
-      rowTop.style.transform = `translateX(${-scrollPos * speedTop + swipeOffsetTop}px)`;
-      rowBottom.style.transform = `translateX(${-scrollPos * speedBottom * 0.6 + swipeOffsetBottom - rowBottom.scrollWidth * 0.15}px)`;
+      rowTop.style.transform = `translateX(${-scrollPos * 0.25 + swipeOffsetTop}px)`;
+      rowBottom.style.transform = `translateX(${scrollPos * 0.15 + swipeOffsetBottom}px)`;
     }, { passive: true });
+
+
     // ── Cursor ───────────────────────────────────────
     const cursor = document.getElementById("cursor");
     const ring = document.getElementById("cursorRing");
