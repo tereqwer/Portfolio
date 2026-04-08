@@ -2,30 +2,6 @@
 
 Personal portfolio website for a Motion Designer & Developer.
 
-## Stack
-
-- **Vite** — build tool & dev server
-- **Vanilla JS** — no framework overhead
-- **GSAP** — animations & scroll interactions
-- **Lenis** — smooth scrolling
-- **Netlify** — hosting & CI/CD
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
 ## Project Structure
 
 ```

@@ -16,14 +16,6 @@
       position: relative;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     :root {
       --bg: #080808;
       --text: #edeae0;
@@ -346,7 +338,7 @@
 
     .svg-outline,
     .svg-fill {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: 550px;
       /* Твій розмір */
       font-weight: bold;
@@ -482,7 +474,7 @@
     }
 
     .services-svg text {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: clamp(150px, 25vw, 450px);
       /* Адаптивний розмір */
       font-weight: bold;
@@ -539,7 +531,7 @@
       /* Обов'язково для анімації */
 
       /* РОЗМІР: Зробив ще більшим, щоб було солідно */
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: clamp(5rem, 12vw, 10rem);
       font-weight: bold;
 
@@ -559,7 +551,7 @@
     }
 
     .service-text h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: clamp(2.5rem, 6vw, 5rem);
       margin: 0 0 20px 0;
       color: #000;
@@ -567,7 +559,7 @@
     }
 
     .service-text p {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: clamp(1rem, 1.5vw, 1.4rem);
       color: #333;
       max-width: 550px;
@@ -610,7 +602,7 @@
     }
 
     .projects-title-svg text {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: 450px;
       font-weight: bold;
       text-transform: uppercase;
@@ -642,7 +634,6 @@
       height: calc(3 * 80vh + 100vh);
       /* 3 картки + фінальна пауза */
       padding-bottom: 0;
-
     }
 
     .project-card {
@@ -685,7 +676,7 @@
     }
 
     .c-num {
-      font-family: 'Bebas Neue';
+      font-family: "Bebas Neue";
       font-size: 8rem;
       /* Збільшено розмір */
       opacity: 0.9;
@@ -694,7 +685,7 @@
     }
 
     .c-name {
-      font-family: 'Bebas Neue';
+      font-family: "Bebas Neue";
       font-size: 4rem;
       color: #fff;
     }
@@ -776,7 +767,7 @@
     }
 
     .contact-left h2 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: clamp(5rem, 9vw, 9rem);
       line-height: 0.9;
       margin: 0 0 30px 0;
@@ -785,7 +776,7 @@
 
     .contact-link {
       display: block;
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: clamp(1.2rem, 1.5vw, 1.8rem);
       font-weight: 500;
       color: #080808;
@@ -800,7 +791,7 @@
     }
 
     .contact-label {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: clamp(1.2rem, 1.5vw, 1.8rem);
       font-weight: 500;
       color: rgba(8, 8, 8, 0.5);
@@ -827,7 +818,7 @@
       border: none;
       border-bottom: 1px solid rgba(8, 8, 8, 0.3);
       padding: 10px 0;
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: 1.1rem;
       color: #080808;
       outline: none;
@@ -847,7 +838,7 @@
       border: 1px solid #080808;
       border-radius: 100px;
       background: transparent;
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-weight: 600;
       font-size: 1rem;
       color: #080808;
@@ -944,7 +935,7 @@
 
     .footer-left h2 {
       margin: 0;
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       font-size: clamp(5rem, 10vw, 12rem);
       line-height: 0.85;
       text-transform: uppercase;
@@ -970,7 +961,7 @@
     }
 
     .footer-col h3 {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 25px;
@@ -989,7 +980,7 @@
 
     .footer-col li,
     .footer-col a {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: 1.1rem;
       color: #edeae0;
       text-decoration: none;
@@ -1065,6 +1056,14 @@
       .marquee-item:hover {
         transform: scale(1.05) rotate(1.5deg);
         z-index: 10;
+      }
+    }
+
+    @media (pointer: coarse) {
+
+      .cursor,
+      .cursor-ring {
+        display: none !important;
       }
     }
 
@@ -1209,7 +1208,7 @@
       .services-svg text {
         /* Розмір як в About */
         font-size: 450px !important;
-        font-family: 'Bebas Neue', sans-serif;
+        font-family: "Bebas Neue", sans-serif;
         font-weight: bold;
         text-transform: uppercase;
       }
@@ -1279,7 +1278,7 @@
       .about-title-svg text {
         /* Збільшуємо шрифт всередині SVG, щоб літери були масивними */
         font-size: 600px !important;
-        font-family: 'Bebas Neue', sans-serif;
+        font-family: "Bebas Neue", sans-serif;
         font-weight: bold;
         text-transform: uppercase;
       }
@@ -1488,7 +1487,6 @@
         </div>
       </div>
     </div>
-
   </section>
 
   <section id="about">
@@ -1500,14 +1498,22 @@
     <div class="about-content">
       <div class="about-title-wrapper">
         <svg viewBox="0 0 1800 800" class="about-title-svg">
-          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">ABOUT ME</text>
-          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="aboutTitleFill">ABOUT ME</text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">
+            ABOUT ME
+          </text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="aboutTitleFill">
+            ABOUT ME
+          </text>
         </svg>
       </div>
 
       <div class="about-description">
-        <p><span id="line0">Bringing static ideas to life through rhythm and motion.</span></p>
-        <p><span id="line1">Focused on branding, digital storytelling, and seamless UX.</span></p>
+        <p>
+          <span id="line0">Bringing static ideas to life through rhythm and motion.</span>
+        </p>
+        <p>
+          <span id="line1">Focused on branding, digital storytelling, and seamless UX.</span>
+        </p>
         <p><span id="line2">Let's move the digital world together.</span></p>
       </div>
     </div>
@@ -1517,8 +1523,12 @@
     <div class="services-frame">
       <div class="services-title-wrapper">
         <svg viewBox="0 0 1800 600" class="services-svg">
-          <text x="50%" y="70%" text-anchor="middle" class="serv-outline">SERVICES</text>
-          <text x="50%" y="70%" text-anchor="middle" class="serv-fill" id="servFill">SERVICES</text>
+          <text x="50%" y="70%" text-anchor="middle" class="serv-outline">
+            SERVICES
+          </text>
+          <text x="50%" y="70%" text-anchor="middle" class="serv-fill" id="servFill">
+            SERVICES
+          </text>
         </svg>
       </div>
 
@@ -1530,7 +1540,10 @@
             </div>
             <div class="service-text">
               <h3>2D Animation & Kinetic Typography</h3>
-              <p>Creating dynamic motion graphics and high-impact visual stories.</p>
+              <p>
+                Creating dynamic motion graphics and high-impact visual
+                stories.
+              </p>
             </div>
           </div>
           <div class="service-line"></div>
@@ -1543,7 +1556,9 @@
             </div>
             <div class="service-text">
               <h3>3D Visualization & Product Demos</h3>
-              <p>High-end product rendering and functional 3D demonstrations.</p>
+              <p>
+                High-end product rendering and functional 3D demonstrations.
+              </p>
             </div>
           </div>
           <div class="service-line"></div>
@@ -1569,7 +1584,9 @@
             </div>
             <div class="service-text">
               <h3>VFX & Post-Production</h3>
-              <p>Visual effects and seamless integration for cinematic content.</p>
+              <p>
+                Visual effects and seamless integration for cinematic content.
+              </p>
             </div>
           </div>
           <div class="service-line"></div>
@@ -1582,7 +1599,10 @@
             </div>
             <div class="service-text">
               <h3>UI/UX Motion Design</h3>
-              <p>Interactive prototypes and interface animations that feel natural.</p>
+              <p>
+                Interactive prototypes and interface animations that feel
+                natural.
+              </p>
             </div>
           </div>
           <div class="service-line"></div>
@@ -1593,17 +1613,19 @@
 
   <section id="projects">
     <div class="projects-container">
-
       <div class="projects-title-wrapper">
         <svg viewBox="0 0 1800 600" class="projects-title-svg">
-          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">PROJECTS</text>
-          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="projectsTitleFill">PROJECTS</text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-outline">
+            PROJECTS
+          </text>
+          <text x="50%" y="70%" text-anchor="middle" class="svg-fill" id="projectsTitleFill">
+            PROJECTS
+          </text>
         </svg>
       </div>
 
       <div class="projects-stack">
-
-        <div class="project-card" style="--i: 1;">
+        <div class="project-card" style="--i: 1">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">01</span>
@@ -1617,13 +1639,17 @@
               <video src="public/videos/4.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/oshi_ae.png"></div>
-              <div class="img-box bottom"><img src="public/images/oshi_ae2.png"></div>
+              <div class="img-box top">
+                <img src="public/images/oshi_ae.png" />
+              </div>
+              <div class="img-box bottom">
+                <img src="public/images/oshi_ae2.png" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="project-card" style="--i: 2;">
+        <div class="project-card" style="--i: 2">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">02</span>
@@ -1637,13 +1663,17 @@
               <video src="public/videos/8.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/radio_ae.png"></div>
-              <div class="img-box bottom"><img src="public/images/radio_ae2.png"></div>
+              <div class="img-box top">
+                <img src="public/images/radio_ae.png" />
+              </div>
+              <div class="img-box bottom">
+                <img src="public/images/radio_ae2.png" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="project-card" style="--i: 3;">
+        <div class="project-card" style="--i: 3">
           <div class="card-header">
             <div class="client-box">
               <span class="c-num">03</span>
@@ -1657,12 +1687,15 @@
               <video src="public/videos/3.mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="side-images">
-              <div class="img-box top"><img src="public/images/logo_ae.png"></div>
-              <div class="img-box bottom"><img src="public/images/logo_ae2.png"></div>
+              <div class="img-box top">
+                <img src="public/images/logo_ae.png" />
+              </div>
+              <div class="img-box bottom">
+                <img src="public/images/logo_ae2.png" />
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -1673,7 +1706,7 @@
 
     <div class="contact-inner">
       <div class="contact-left">
-        <h2 class="slide-in">LET'S<br>GET IN<br>TOUCH</h2>
+        <h2 class="slide-in">LET'S<br />GET IN<br />TOUCH</h2>
         <a href="mailto:pavlotereshchuk@gmail.com" class="contact-link slide-in delay-1">pavlotereshchuk@gmail.com</a>
         <div class="telegram-wrapper slide-in delay-2">
           <span class="contact-label">telegram: </span>
@@ -1682,16 +1715,18 @@
       </div>
 
       <div class="contact-right">
-        <form class="contact-form" id="tgForm">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+          <input type="hidden" name="access_key" value="ce2283eb-1065-4707-ad87-41a63340cc41" />
+
           <div class="form-row">
-            <input type="text" id="name" placeholder="Full Name*" required>
+            <input type="text" name="name" placeholder="Full Name*" required />
           </div>
           <div class="form-row split">
-            <input type="email" id="email" placeholder="Email*" required>
-            <input type="tel" id="phone" placeholder="Phone">
+            <input type="email" name="email" placeholder="Email*" required />
+            <input type="tel" name="phone" placeholder="Phone" />
           </div>
           <div class="form-row">
-            <input type="text" id="message" placeholder="Message">
+            <input type="text" name="message" placeholder="Message" />
           </div>
           <button type="submit" class="btn-submit">SEND</button>
         </form>
@@ -1703,7 +1738,7 @@
     <div class="footer-inner">
       <div class="footer-left">
         <h2 class="footer-name">
-          <span class="outline-text">PAVLO</span><br>
+          <span class="outline-text">PAVLO</span><br />
           <span class="outline-text">TERESHCHUK</span>
         </h2>
       </div>
@@ -1711,18 +1746,25 @@
         <div class="footer-col">
           <h3>SOCIAL</h3>
           <ul>
-            <li><a href="https://www.instagram.com/noviybog/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <li>
+              <a href="https://www.instagram.com/noviybog/" target="_blank" rel="noopener noreferrer">Instagram</a>
             </li>
-            <li><a href="https://www.facebook.com/profile.php?id=100014790825241" target="_blank"
-                rel="noopener noreferrer">Facebook</a></li>
+            <li>
+              <a href="https://www.facebook.com/profile.php?id=100014790825241" target="_blank"
+                rel="noopener noreferrer">Facebook</a>
+            </li>
           </ul>
         </div>
         <div class="footer-col">
           <h3>CONTACT</h3>
           <ul>
-            <li><a href="mailto:pavlotereshchuk@gmail.com">pavlotereshchuk@gmail.com</a></li>
-            <li><a href="https://t.me/bowbowbowq" target="_blank" rel="noopener noreferrer">@bowbowbowq</a></li>
-            <li>Khmelnytskyi<br>Ukraine</li>
+            <li>
+              <a href="mailto:pavlotereshchuk@gmail.com">pavlotereshchuk@gmail.com</a>
+            </li>
+            <li>
+              <a href="https://t.me/bowbowbowq" target="_blank" rel="noopener noreferrer">@bowbowbowq</a>
+            </li>
+            <li>Khmelnytskyi<br />Ukraine</li>
           </ul>
         </div>
       </div>
@@ -1748,7 +1790,6 @@
       // Крок 4: Повертаємо центрування
       title.style.display = "flex";
     }
-
 
     // customers animation
     window.addEventListener("resize", fitTitle);
@@ -1795,123 +1836,109 @@
       }
     });
 
-    document.getElementById('customers').addEventListener('touchmove', (e) => {
-      if (isHorizontalSwipe === true) e.preventDefault();
-    }, { passive: false });
+    document.getElementById("customers").addEventListener(
+      "touchmove",
+      (e) => {
+        if (isHorizontalSwipe === true) e.preventDefault();
+      },
+      { passive: false },
+    );
 
-    marqueeContainer.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      isHorizontalSwipe = null;
-      // Запам'ятовуємо поточний свайп-зсув як старт
-      swipeStartTop = swipeOffsetTop;
-      swipeStartBottom = swipeOffsetBottom;
-    }, { passive: true });
+    marqueeContainer.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isHorizontalSwipe = null;
+        // Запам'ятовуємо поточний свайп-зсув як старт
+        swipeStartTop = swipeOffsetTop;
+        swipeStartBottom = swipeOffsetBottom;
+      },
+      { passive: true },
+    );
 
-    marqueeContainer.addEventListener('touchmove', (e) => {
-      if (window.innerWidth > 768) return;
+    marqueeContainer.addEventListener(
+      "touchmove",
+      (e) => {
+        if (window.innerWidth > 768) return;
 
-      const deltaX = e.touches[0].clientX - touchStartX;
-      const deltaY = e.touches[0].clientY - touchStartY;
+        const deltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = e.touches[0].clientY - touchStartY;
 
-      if (isHorizontalSwipe === null) {
-        if (Math.abs(deltaX) > Math.abs(deltaY) + 5) {
-          isHorizontalSwipe = true;
-        } else if (Math.abs(deltaY) > Math.abs(deltaX) + 5) {
-          isHorizontalSwipe = false;
-        } else {
-          return;
+        if (isHorizontalSwipe === null) {
+          if (Math.abs(deltaX) > Math.abs(deltaY) + 5) {
+            isHorizontalSwipe = true;
+          } else if (Math.abs(deltaY) > Math.abs(deltaX) + 5) {
+            isHorizontalSwipe = false;
+          } else {
+            return;
+          }
         }
-      }
 
-      if (!isHorizontalSwipe) return;
+        if (!isHorizontalSwipe) return;
 
-      // Половина scrollWidth бо відео дублюються
-      const loopTop = rowTop.scrollWidth / 2;
-      const loopBottom = rowBottom.scrollWidth / 2;
+        // Половина scrollWidth бо відео дублюються
+        const loopTop = rowTop.scrollWidth / 2;
+        const loopBottom = rowBottom.scrollWidth / 2;
 
-      let newTop = swipeStartTop + deltaX;
-      let newBottom = swipeStartBottom + deltaX * 0.6;
+        let newTop = swipeStartTop + deltaX;
+        let newBottom = swipeStartBottom + deltaX * 0.6;
 
-      // Безкінечна петля — нормалізуємо в діапазон [-loopTop, 0]
-      newTop = ((newTop % loopTop) + loopTop) % loopTop;
-      if (newTop > 0) newTop -= loopTop;
+        // Безкінечна петля — нормалізуємо в діапазон [-loopTop, 0]
+        newTop = ((newTop % loopTop) + loopTop) % loopTop;
+        if (newTop > 0) newTop -= loopTop;
 
-      newBottom = ((newBottom % loopBottom) + loopBottom) % loopBottom;
-      if (newBottom > 0) newBottom -= loopBottom;
+        newBottom = ((newBottom % loopBottom) + loopBottom) % loopBottom;
+        if (newBottom > 0) newBottom -= loopBottom;
 
-      swipeOffsetTop = newTop;
-      swipeOffsetBottom = newBottom;
+        swipeOffsetTop = newTop;
+        swipeOffsetBottom = newBottom;
 
-      const scrollPos = window.pageYOffset;
-      rowTop.style.transform = `translateX(${-scrollPos * 0.25 + swipeOffsetTop}px)`;
-      rowBottom.style.transform = `translateX(${scrollPos * 0.15 + swipeOffsetBottom}px)`;
-    }, { passive: true });
-
+        const scrollPos = window.pageYOffset;
+        rowTop.style.transform = `translateX(${-scrollPos * 0.25 + swipeOffsetTop}px)`;
+        rowBottom.style.transform = `translateX(${scrollPos * 0.15 + swipeOffsetBottom}px)`;
+      },
+      { passive: true },
+    );
 
     // ── Cursor ───────────────────────────────────────
-    const cursor = document.getElementById("cursor");
-    const ring = document.getElementById("cursorRing");
-    let mx = 0,
-      my = 0,
-      rx = 0,
-      ry = 0;
+    if (window.matchMedia("(pointer: fine)").matches) {
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
 
-    document.addEventListener("mousemove", (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.style.left = mx + "px";
-      cursor.style.top = my + "px";
-    });
-    (function loopRing() {
-      rx += (mx - rx) * 0.13;
-      ry += (my - ry) * 0.13;
-      ring.style.left = rx + "px";
-      ring.style.top = ry + "px";
-      requestAnimationFrame(loopRing);
-    })();
-
-    document.querySelectorAll("a").forEach((el) => {
-      el.addEventListener("mouseenter", () => {
-        cursor.style.transform = "translate(-50%,-50%) scale(3)";
-        ring.style.width = "54px";
-        ring.style.height = "54px";
-        ring.style.opacity = "0.4";
-      });
-      el.addEventListener("mouseleave", () => {
-        cursor.style.transform = "translate(-50%,-50%) scale(1)";
-        ring.style.width = "32px";
-        ring.style.height = "32px";
-        ring.style.opacity = "1";
-      });
-    });
-
-    // ── Avatar parallax ──────────────────────────────
-    const avatar = document.getElementById("avatar");
-    let ax = 0,
-      ay = 0,
-      tx = 0,
-      ty = 0;
-    const isMobile = window.matchMedia("(max-width: 700px)").matches;
-
-    if (!isMobile) {
       document.addEventListener("mousemove", (e) => {
-        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-        // Збільшив амплітуду, щоб було видно рух
-        tx = nx * 50;
-        ty = ny * 25;
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
       });
-      (function loopAvatar() {
-        ax += (tx - ax) * 0.08;
-        ay += (ty - ay) * 0.08;
 
-        // Обов'язково додаємо translateX(-50%), бо картинка центрована через цей хак
-        // rotateY додає "об'єму" при русі
-        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${ax * 0.2}deg)`;
-
-        requestAnimationFrame(loopAvatar);
+      (function loopRing() {
+        rx += (mx - rx) * 0.13;
+        ry += (my - ry) * 0.13;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(loopRing);
       })();
+
+      document.querySelectorAll("a").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          cursor.style.transform = "translate(-50%,-50%) scale(3)";
+          ring.style.width = "54px";
+          ring.style.height = "54px";
+          ring.style.opacity = "0.4";
+        });
+        el.addEventListener("mouseleave", () => {
+          cursor.style.transform = "translate(-50%,-50%) scale(1)";
+          ring.style.width = "32px";
+          ring.style.height = "32px";
+          ring.style.opacity = "1";
+        });
+      });
     }
 
     // --- ABOUT SECTION SCROLL LOGIC ---
@@ -2003,41 +2030,51 @@
     })();
 
     document.addEventListener("DOMContentLoaded", () => {
-      const section = document.getElementById('services');
-      const fill = document.getElementById('servFill');
-      const items = document.querySelectorAll('.service-item');
+      const section = document.getElementById("services");
+      const fill = document.getElementById("servFill");
+      const items = document.querySelectorAll(".service-item");
 
-      function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+      function clamp(v, lo, hi) {
+        return Math.min(Math.max(v, lo), hi);
+      }
 
       // 1. ПЛАВНА ЗАЛИВКА ТАЙТЛА "SERVICES"
-      window.addEventListener('scroll', () => {
-        if (!section || !fill) return;
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!section || !fill) return;
 
-        const winH = window.innerHeight;
-        const secRect = section.getBoundingClientRect();
+          const winH = window.innerHeight;
+          const secRect = section.getBoundingClientRect();
 
-        // Розрахунок: починає заливатись, коли верх секції піднявся на 40% екрана
-        // p стає 1, коли проскролили ще 50% висоти вікна
-        let p = clamp((winH - secRect.top - (winH * 0.4)) / (winH * 0.5), 0, 1);
+          // Розрахунок: починає заливатись, коли верх секції піднявся на 40% екрана
+          // p стає 1, коли проскролили ще 50% висоти вікна
+          let p = clamp(
+            (winH - secRect.top - winH * 0.4) / (winH * 0.5),
+            0,
+            1,
+          );
 
-        fill.style.opacity = p;
-      }, { passive: true });
+          fill.style.opacity = p;
+        },
+        { passive: true },
+      );
 
       // 2. ПОЯВА ПУНКТІВ ТА ЦИФР (Intersection Observer)
       const observerOptions = {
         threshold: 0.15, // Спрацює, коли 15% пункту з'явиться в кадрі
-        rootMargin: "0px 0px -50px 0px" // Трішки раніше за фактичний край
+        rootMargin: "0px 0px -50px 0px", // Трішки раніше за фактичний край
       };
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           const item = entry.target;
-          const line = item.querySelector('.service-line');
-          const num = item.querySelector('.service-num');
+          const line = item.querySelector(".service-line");
+          const num = item.querySelector(".service-num");
 
           if (entry.isIntersecting) {
             // Додаємо клас active для CSS (якщо захочеш щось докрутити там)
-            item.classList.add('active');
+            item.classList.add("active");
 
             // Анімуємо сам контейнер
             item.style.opacity = "1";
@@ -2053,7 +2090,7 @@
             // observer.unobserve(item);
           } else {
             // Якщо хочеш, щоб вони зникали назад, коли юзер скролить вгору
-            item.classList.remove('active');
+            item.classList.remove("active");
             item.style.opacity = "0";
             item.style.transform = "translateY(100px) skewY(2deg)";
             if (num) num.style.transform = "translateY(100%)";
@@ -2068,34 +2105,43 @@
     });
 
     // Projects
-    window.addEventListener('scroll', () => {
-      const section = document.getElementById('projects');
-      const fill = document.getElementById('projectsTitleFill');
-      if (!section || !fill) return;
+    window.addEventListener(
+      "scroll",
+      () => {
+        const section = document.getElementById("projects");
+        const fill = document.getElementById("projectsTitleFill");
+        if (!section || !fill) return;
 
-      const rect = section.getBoundingClientRect();
-      const winH = window.innerHeight;
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight;
 
-      // Логіка як в About: починає чорніти при появі в зоні 40%
-      let p = (winH - rect.top - (winH * 0.3)) / (winH * 0.5);
-      fill.style.opacity = Math.min(Math.max(p, 0), 1);
-    }, { passive: true });
+        // Логіка як в About: починає чорніти при появі в зоні 40%
+        let p = (winH - rect.top - winH * 0.3) / (winH * 0.5);
+        fill.style.opacity = Math.min(Math.max(p, 0), 1);
+      },
+      { passive: true },
+    );
 
     // АНІМАЦІЯ СЕКЦІЇ CONTACTS ПО СКРОЛУ
     document.addEventListener("DOMContentLoaded", () => {
       // Шукаємо всі тексти і заглушки в контактах
-      const contactAnimElements = document.querySelectorAll('#contact .slide-in, #contact .contact-3d-placeholder');
+      const contactAnimElements = document.querySelectorAll(
+        "#contact .slide-in, #contact .contact-3d-placeholder",
+      );
 
-      const contactObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          // Якщо елемент з'явився на екрані хоча б на 20%
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            // Зупиняємо слідкування, щоб анімація програлась лише 1 раз
-            contactObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 }); // 0.2 означає, що анімація почнеться, коли видно 20% елемента
+      const contactObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Якщо елемент з'явився на екрані хоча б на 20%
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              // Зупиняємо слідкування, щоб анімація програлась лише 1 раз
+              contactObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      ); // 0.2 означає, що анімація почнеться, коли видно 20% елемента
 
       contactAnimElements.forEach((el) => {
         contactObserver.observe(el);
@@ -2104,56 +2150,32 @@
 
     // Встав це в свій <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const contactSection = document.getElementById('contact');
+      const contactSection = document.getElementById("contact");
       if (!contactSection) return;
 
       // Обзервер вішається на саму секцію, а не на окремі елементи.
       // Анімація спрацює тільки тоді, коли 30% секції #contact з'явиться на екрані.
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Знаходимо всі елементи для анімації і даємо їм клас
-            const animEls = contactSection.querySelectorAll('.slide-in, .contact-3d-placeholder');
-            animEls.forEach(el => el.classList.add('active'));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Знаходимо всі елементи для анімації і даємо їм клас
+              const animEls = contactSection.querySelectorAll(
+                ".slide-in, .contact-3d-placeholder",
+              );
+              animEls.forEach((el) => el.classList.add("active"));
 
-            // Відключаємо, щоб не спрацьовувало повторно
-            observer.unobserve(contactSection);
-          }
-        });
-      }, {
-        threshold: 0.3
-      });
+              // Відключаємо, щоб не спрацьовувало повторно
+              observer.unobserve(contactSection);
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+        },
+      );
 
       observer.observe(contactSection);
-
-      // Форма телеграм
-      document.getElementById('tgForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const TOKEN = "8512722026:AAHigZuyPdQpTz4VrIarr-EyhBQRpfwBC0Y"; // Встав свій токен
-        const CHAT_ID = "456911848";         // Встав свій ID
-        const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const message = document.getElementById('message').value;
-
-        const text = `Нова заявка з сайту!\n\nІм'я: ${name}\nEmail: ${email}\nТелефон: ${phone}\nПовідомлення: ${message}`;
-
-        fetch(URI_API, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: text })
-        })
-          .then(res => {
-            if (res.ok) {
-              alert("Відправлено успішно!");
-              document.getElementById('tgForm').reset();
-            } else {
-              alert("Помилка відправки.");
-            }
-          }).catch(err => alert("Помилка відправки."));
-      });
     });
   </script>
 </body>
