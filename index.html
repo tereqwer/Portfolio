@@ -146,7 +146,7 @@
     /* Title — прямо під nav */
     .hero-title {
       position: absolute;
-      top: 7vh;
+      top: -23vh;
       left: 3%;
       transform: translateX(-50%);
       /* Центруємо по горизонталі */
@@ -164,7 +164,7 @@
 
     /* Якщо текст розбитий на спани і ти хочеш їх один під одним */
     .hero-title span {
-      display: block;
+      display: inline-block;
       text-align: center;
       width: 100%;
     }
@@ -993,6 +993,7 @@
       opacity: 1;
     }
 
+
     /* ── Keyframes ── */
     @keyframes fadeDown {
       from {
@@ -1005,6 +1006,8 @@
         transform: translateY(0);
       }
     }
+
+
 
     @keyframes fadeIn {
       from {
@@ -1380,7 +1383,6 @@
 
   <section id="hero">
     <h1 class="hero-title" id="heroTitle">HI, I'M PAVLO</h1>
-
     <div class="hero-content-inner">
       <p class="hero-subtitle">
         A motion designer<br />
@@ -1772,6 +1774,7 @@
   </footer>
 
   <script>
+
     function fitTitle() {
       const title = document.getElementById("heroTitle");
       const avail = window.innerWidth * 0.95;
@@ -1788,7 +1791,41 @@
       title.style.fontSize = newSize + "px";
 
       // Крок 4: Повертаємо центрування
-      title.style.display = "flex";
+      title.style.display = ""; /* ТУТ БУВ "flex", залишаємо пусті лапки */
+    }
+
+    // Виклик при старті та ресайзі
+    window.addEventListener("resize", fitTitle);
+    window.addEventListener("load", fitTitle);
+    fitTitle();
+
+
+    // ── Avatar parallax ──────────────────────────────
+    const avatar = document.getElementById("avatar");
+    let ax = 0,
+      ay = 0,
+      tx = 0,
+      ty = 0;
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
+    if (!isMobile) {
+      document.addEventListener("mousemove", (e) => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        // Збільшив амплітуду, щоб було видно рух
+        tx = nx * 50;
+        ty = ny * 25;
+      });
+      (function loopAvatar() {
+        ax += (tx - ax) * 0.08;
+        ay += (ty - ay) * 0.08;
+
+        // Обов'язково додаємо translateX(-50%), бо картинка центрована через цей хак
+        // rotateY додає "об'єму" при русі
+        avatar.style.transform = `translateX(calc(-50% + ${ax}px)) translateY(${ay}px) rotateY(${ax * 0.2}deg)`;
+
+        requestAnimationFrame(loopAvatar);
+      })();
     }
 
     // customers animation
